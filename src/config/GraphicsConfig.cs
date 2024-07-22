@@ -23,6 +23,7 @@ public class GraphicsConfig
 
         SerpentGame.Graphics.SynchronizeWithVerticalRetrace = VSYNC;
         SerpentGame.Graphics.IsFullScreen = FULLSCREEN;
+        SerpentGame.Graphics.HardwareModeSwitch = false;
 
         SerpentGame.Graphics.ApplyChanges();
     } 
