@@ -15,6 +15,7 @@ public class Sprite : Component
 
     // Sprite settings
     public Vector2 Scale { get; set; } = Vector2.One;
+    public Vector2 Coordinates { get; set; } = Vector2.Zero;
     public float Rotation { get; set; } = 0f;
     public float Layer { get; set; } = 0f;
 
@@ -30,10 +31,19 @@ public class Sprite : Component
         fileStream.Close();
     }
 
+
+
     public override void Draw()
     {
         if (!Enabled) return;
 
-        SerpentEngine.Draw.SpriteBatch.Draw(texture2d, GameObject.Position, Rectangle.Empty, Color.White, Rotation, new Vector2(texture2d.Width / 2, texture2d.Height / 2), Scale, SpriteEffects.None, Layer);
+        SerpentEngine.Draw.SpriteBatch.Draw(texture2d, GameObject.Position, new Rectangle((int)Coordinates.X, (int)Coordinates.Y, texture2d.Width, texture2d.Height), Color.White, Rotation, new Vector2(texture2d.Width / 2, texture2d.Height / 2), Scale, SpriteEffects.None, Layer);
+    }
+
+    public void Draw(Vector2 tileSize, Vector2 size)
+    {
+        if (!Enabled) return;
+
+        SerpentEngine.Draw.SpriteBatch.Draw(texture2d, GameObject.Position, new Rectangle((int)Coordinates.X * (int)tileSize.X, (int)Coordinates.Y * (int)tileSize.Y, texture2d.Width / (int)size.X, texture2d.Height / (int)size.Y), Color.White, Rotation, new Vector2(texture2d.Width / 2, texture2d.Height / 2), Scale, SpriteEffects.None, Layer);
     }
 }
