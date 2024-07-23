@@ -10,8 +10,10 @@ namespace SerpentEngine
         public static SerpentGame Instance { get; private set; }
         public static GraphicsDeviceManager Graphics { get; private set; }
         public static SceneManager SceneManager { get; private set; } = new SceneManager();
+        public static ImGuiManager ImGuiManager { get; private set; } = new ImGuiManager();
 
         // Properties
+        public static GameTime GameTime { get; private set; }
         public static float DeltaTime { get; private set; }
 
         public SerpentGame(string windowTitle)
@@ -35,10 +37,13 @@ namespace SerpentEngine
         protected override void LoadContent()
         {
            SerpentEngine.Draw.Initialize(GraphicsDevice);
+
+           ImGuiManager.Initialize();
         }
 
         protected override void Update(GameTime gameTime)
         {
+            GameTime = gameTime;
             DeltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
             SceneManager.Update();
@@ -51,6 +56,10 @@ namespace SerpentEngine
             GraphicsDevice.Clear(Color.Black);
 
             SceneManager.Draw();
+
+#if DEBUG
+            ImGuiManager.Draw();
+#endif
 
             base.Draw(gameTime);
         }

@@ -31,6 +31,14 @@ public class GameObject
         Components.AddComponent(component);
     }
 
+    public void AddComponents(params Component[] components)
+    {
+        foreach (Component component in components)
+        {
+            AddComponent(component);
+        }
+    }
+
     public void RemoveComponent(Component component)
     {
         Components.RemoveComponent(component);
