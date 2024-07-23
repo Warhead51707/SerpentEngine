@@ -31,6 +31,11 @@ public class ComponentList
     public void SetGameObject(GameObject gameObject)
     {
         GameObject = gameObject;
+
+        foreach (Component component in Components)
+        {
+            component.Add(gameObject);
+        }
     }
 
     public void AddComponent(Component component)
