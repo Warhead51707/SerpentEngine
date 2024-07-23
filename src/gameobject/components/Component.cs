@@ -8,6 +8,7 @@ namespace SerpentEngine;
 public abstract class Component
 {
     public GameObject GameObject { get; private set; }
+    public ComponentList SubComponents { get; private set; } = new ComponentList();
     public bool Enabled { get; set; } = true;
     public bool Visible { get; private set; } = true;
 
@@ -19,9 +20,13 @@ public abstract class Component
     public void Add(GameObject gameObject)
     {
         GameObject = gameObject;
+        SubComponents.SetGameObject(gameObject);
     }
 
     public virtual void Update() { }
 
-    public virtual void Draw() { }
+    public virtual void Draw()
+    {
+        SubComponents.Draw();
+    }
 }

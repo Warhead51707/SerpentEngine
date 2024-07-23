@@ -11,7 +11,7 @@ public class ComponentList
     public GameObject GameObject { get; private set; }
     public List<Component> Components { get; private set; } = new List<Component>();
 
-    public ComponentList(GameObject gameObject)
+    public ComponentList(GameObject gameObject = null)
     {
         GameObject = gameObject;
     }
@@ -27,6 +27,12 @@ public class ComponentList
             }
         }
     }
+
+    public void SetGameObject(GameObject gameObject)
+    {
+        GameObject = gameObject;
+    }
+
     public void AddComponent(Component component)
     {
         Components.Add(component);
