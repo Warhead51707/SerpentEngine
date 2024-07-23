@@ -34,6 +34,6 @@ public class Sprite : Component
     {
         if (!Enabled) return;
 
-        SerpentEngine.Draw.SpriteBatch.Draw(texture2d, GameObject.Position, null, Color.White, Rotation, new Vector2(texture2d.Width / 2, texture2d.Height / 2), Scale, SpriteEffects.None, Layer);
+        SerpentEngine.Draw.SpriteBatch.Draw(texture2d, GameObject.Position, Rectangle.Empty, Color.White, Rotation, new Vector2(texture2d.Width / 2, texture2d.Height / 2), Scale, SpriteEffects.None, Layer);
     }
 }
