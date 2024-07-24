@@ -18,12 +18,15 @@ namespace SerpentEngine
 
         public static float GetDistance(Vector2 pos, Vector2 target)
         {
-            //Returns the distance between to coordinates.
+            //Returns the distance between two coordinates.
             return (float)Math.Sqrt(Math.Pow(pos.X - target.X, 2) + Math.Pow(pos.Y - target.Y, 2));
         }
 
         public static Vector2 ToCoordinates(int num, Vector2 dims)
         {
+
+            //Transforms a number into coordinates
+
             int x = 0;
             int y = 0;
 
@@ -43,6 +46,9 @@ namespace SerpentEngine
 
         public static int ToNumber(Vector2 cords, Vector2 dims)
         {
+            //Transforms a coordinate into a number
+
+
             int x = 0;
             int y = 0;
 
