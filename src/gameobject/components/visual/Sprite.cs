@@ -31,8 +31,6 @@ public class Sprite : Component
         fileStream.Close();
     }
 
-
-
     public override void Draw()
     {
         if (!Enabled) return;

@@ -8,15 +8,13 @@ using System.Threading.Tasks;
 
 namespace SerpentEngine;
 
-public class Spritesheet : Component
+public class SpriteSheet : Component
 {
-
     public Sprite CurrentSprite { get; set; }
     public Vector2 Size { get; set; } = Vector2.Zero;
     public Vector2 TileSize { get; set; } = Vector2.Zero;
 
-
-    public Spritesheet(string path, Vector2 tileSize, Vector2 size) : base(true)
+    public SpriteSheet(string path, Vector2 tileSize, Vector2 size) : base(true)
     {
         Size = size;
         TileSize = tileSize;
@@ -24,7 +22,6 @@ public class Spritesheet : Component
         CurrentSprite = new Sprite(path);
 
         SubComponents.AddComponent(CurrentSprite);
-
     }
 
     public void ChangeCoordinates(Vector2 coordinates)
@@ -32,18 +29,8 @@ public class Spritesheet : Component
         CurrentSprite.Coordinates = coordinates;
     }
 
-
     public override void Draw()
     {
         CurrentSprite.Draw(TileSize, Size);
     }
-
-
-
-
-
-
-
-
-
 }

@@ -18,7 +18,7 @@ public abstract class Component
         Visible = visible;
     }
 
-    public void Add(GameObject gameObject)
+    public virtual void Add(GameObject gameObject)
     {
         GameObject = gameObject;
         SubComponents.SetGameObject(gameObject);
