@@ -29,6 +29,10 @@ public class SpriteSheet : Component
         CurrentSprite.Coordinates = coordinates;
     }
 
+    public void ChangeCoordinates(int coordinates)
+    {
+        CurrentSprite.Coordinates = Helper.ToCoordinates(coordinates, Size);
+    }
 
     public override void Draw()
     {
