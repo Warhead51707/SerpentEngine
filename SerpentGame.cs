@@ -13,12 +13,6 @@ namespace SerpentEngine
         public static SceneManager SceneManager { get; private set; } = new SceneManager();
         public static ImGuiManager ImGuiManager { get; private set; } = new ImGuiManager();
 
-        public static SerpentKeyboard Keyboard;
-
-
-        public static SerpentMouse Mouse;
-
-
         // Properties
         public static GameTime GameTime { get; private set; }
         public static float DeltaTime { get; private set; }
@@ -43,10 +37,9 @@ namespace SerpentEngine
 
         protected override void LoadContent()
         {
-           Keyboard = new SerpentKeyboard();
-           Mouse = new SerpentMouse();
+           Input.Initialize();
 
-            SerpentEngine.Draw.Initialize(GraphicsDevice);
+           SerpentEngine.Draw.Initialize(GraphicsDevice);
 
            ImGuiManager.Initialize();
         }
@@ -56,13 +49,8 @@ namespace SerpentEngine
             GameTime = gameTime;
             DeltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-            Keyboard.Update();
-            Mouse.Update();
-
-
-            Keyboard.UpdateOld();
-            Mouse.UpdateOld();
-
+            Input.Update();
+                
             SceneManager.Update();
 
             base.Update(gameTime);

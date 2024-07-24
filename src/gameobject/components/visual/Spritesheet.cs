@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using SerpentEngine.src.util;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -31,7 +32,7 @@ public class SpriteSheet : Component
 
     public void ChangeCoordinates(int coordinates)
     {
-        CurrentSprite.Coordinates = Helper.ToCoordinates(coordinates, Size);
+        CurrentSprite.Coordinates = VectorHelper.ToCoordinates(coordinates, Size);
     }
 
     public override void Draw()

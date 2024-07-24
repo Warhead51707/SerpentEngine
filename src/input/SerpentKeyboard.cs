@@ -1,82 +1,51 @@
-﻿#region Includes
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Audio;
-using Microsoft.Xna.Framework.Content;
-
-using Microsoft.Xna.Framework.Graphics;
+﻿using System.Collections.Generic;
 using Microsoft.Xna.Framework.Input;
-using Microsoft.Xna.Framework.Input.Touch;
-using Microsoft.Xna.Framework.Media;
-#endregion
 
-namespace SerpentEngine
-{ 
-    public class SerpentKeyboard
+namespace SerpentEngine;
+public class SerpentKeyboard
+{
+    private KeyboardState newKeyboard, oldKeyboard;
+    private List<SerpentKey> pressedKeys, previousPressedKeys = new List<SerpentKey>();
+
+    public void Update()
     {
+        newKeyboard = Keyboard.GetState();
 
-        public KeyboardState newKeyboard, oldKeyboard;
+        GetPressedKeys();
 
-        public List<SerpentKey> pressedKeys = new List<SerpentKey>(), previousPressedKeys = new List<SerpentKey>();
+        oldKeyboard = newKeyboard;
 
-        public SerpentKeyboard()
+        previousPressedKeys = new List<SerpentKey>();
+
+        for (int i = 0; i < pressedKeys.Count; i++)
         {
-
+            previousPressedKeys.Add(pressedKeys[i]);
         }
+    }
 
-        public virtual void Update()
+    public bool GetKeyPress(string KEY)
+    {
+        for (int i = 0; i < pressedKeys.Count; i++)
         {
-            newKeyboard = Keyboard.GetState();
-
-            GetPressedKeys();
-
-        }
-
-        public void UpdateOld()
-        {
-            oldKeyboard = newKeyboard;
-
-            previousPressedKeys = new List<SerpentKey>();
-            for (int i = 0; i < pressedKeys.Count; i++)
+            if (pressedKeys[i].key == KEY)
             {
-                previousPressedKeys.Add(pressedKeys[i]);
+                return true;
             }
         }
 
+        return false;
+    }
 
-        public bool GetPress(string KEY)
+    public void GetPressedKeys()
+    {
+        bool found = false;
+
+        pressedKeys.Clear();
+
+        for (int i = 0; i < newKeyboard.GetPressedKeys().Length; i++)
         {
-
-            for (int i = 0; i < pressedKeys.Count; i++)
-            {
-
-                if (pressedKeys[i].key == KEY)
-                {
-                    return true;
-                }
-
-            }
-
-
-            return false;
+            pressedKeys.Add(new SerpentKey(newKeyboard.GetPressedKeys()[i].ToString(), 1));
         }
-
-
-        public virtual void GetPressedKeys()
-        {
-            bool found = false;
-
-            pressedKeys.Clear();
-            for (int i = 0; i < newKeyboard.GetPressedKeys().Length; i++)
-            {
-
-                pressedKeys.Add(new SerpentKey(newKeyboard.GetPressedKeys()[i].ToString(), 1));
-
-            }
-        }
-
     }
 
 }
