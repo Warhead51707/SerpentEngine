@@ -29,6 +29,7 @@ public class SpriteSheet : Component
         CurrentSprite.Coordinates = coordinates;
     }
 
+
     public override void Draw()
     {
         CurrentSprite.Draw(TileSize, Size);

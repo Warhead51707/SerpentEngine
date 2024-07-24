@@ -81,10 +81,10 @@ namespace SerpentEngine
             oldMousePos = GetScreenPos(oldMouse);
         }
 
-      ///  public virtual float GetDistanceFromClick()
-      //  {
-      //     return Helper.GetDistance(newMousePos, firstMousePos);
-     //   }
+        public virtual float GetDistanceFromClick()
+        {
+            return Helper.GetDistance(newMousePos, firstMousePos);
+        }
 
         public virtual void GetMouseAndAdjust()
         {
