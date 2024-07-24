@@ -1,6 +1,8 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Cheesed;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System.Diagnostics;
 
 namespace SerpentEngine
 {
@@ -11,6 +13,12 @@ namespace SerpentEngine
         public static GraphicsDeviceManager Graphics { get; private set; }
         public static SceneManager SceneManager { get; private set; } = new SceneManager();
         public static ImGuiManager ImGuiManager { get; private set; } = new ImGuiManager();
+
+        public static SerpentKeyboard Keyboard;
+
+
+        public static SerpentMouse Mouse;
+
 
         // Properties
         public static GameTime GameTime { get; private set; }
@@ -36,7 +44,10 @@ namespace SerpentEngine
 
         protected override void LoadContent()
         {
-           SerpentEngine.Draw.Initialize(GraphicsDevice);
+           Keyboard = new SerpentKeyboard();
+           Mouse = new SerpentMouse();
+
+            SerpentEngine.Draw.Initialize(GraphicsDevice);
 
            ImGuiManager.Initialize();
         }
@@ -45,6 +56,13 @@ namespace SerpentEngine
         {
             GameTime = gameTime;
             DeltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+            Keyboard.Update();
+            Mouse.Update();
+
+
+            Keyboard.UpdateOld();
+            Mouse.UpdateOld();
 
             SceneManager.Update();
 
