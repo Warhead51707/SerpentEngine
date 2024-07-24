@@ -16,6 +16,8 @@ public class SpriteSheet : Component
 
     public SpriteSheet(string path, Vector2 tileSize, Vector2 size) : base(true)
     {
+        //test
+
         Size = size;
         TileSize = tileSize;
 
