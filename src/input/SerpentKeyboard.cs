@@ -5,7 +5,7 @@ namespace SerpentEngine;
 public class SerpentKeyboard
 {
     private KeyboardState newKeyboard, oldKeyboard;
-    private List<SerpentKey> pressedKeys, previousPressedKeys = new List<SerpentKey>();
+    private List<SerpentKey> pressedKeys = new List<SerpentKey>(), previousPressedKeys = new List<SerpentKey>();
 
     public void Update()
     {

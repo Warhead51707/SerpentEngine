@@ -10,7 +10,7 @@ namespace SerpentEngine {
     public class Sound : Component
     {
         public string Path { get; set; } = "";
-        public float Volume { get; set; } = 1f;
+        public float Volume { get; private set; } = 1f;
 
         public bool isPlaying { get; set; } = false;
 
@@ -21,6 +21,12 @@ namespace SerpentEngine {
             FileStream fileStream = new FileStream(path + ".wav", FileMode.Open);
             SoundEffect = SoundEffect.FromStream(fileStream);
 
+        }
+
+        public void ChangeVolume(float volume)
+        {
+            Volume = volume;
+            SoundEffect.MasterVolume = Volume;
         }
 
 
