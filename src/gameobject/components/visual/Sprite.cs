@@ -42,6 +42,6 @@ public class Sprite : Component
     {
         if (!Enabled) return;
 
-        SerpentEngine.Draw.SpriteBatch.Draw(texture2d, GameObject.Position, new Rectangle((int)Coordinates.X * (int)tileSize.X, (int)Coordinates.Y * (int)tileSize.Y, texture2d.Width / (int)size.X, texture2d.Height / (int)size.Y), Color.White, Rotation, new Vector2(texture2d.Width / 2, texture2d.Height / 2), Scale, SpriteEffects.None, Layer);
+        SerpentEngine.Draw.SpriteBatch.Draw(texture2d, GameObject.Position, new Rectangle((int)Coordinates.X * (int)tileSize.X, (int)Coordinates.Y * (int)tileSize.Y, texture2d.Width / (int)size.X, texture2d.Height / (int)size.Y), Color.White, Rotation, new Vector2((texture2d.Width / (int)size.X) / 2, (texture2d.Height / (int)size.Y) / 2), Scale, SpriteEffects.None, Layer);
     }
 }
