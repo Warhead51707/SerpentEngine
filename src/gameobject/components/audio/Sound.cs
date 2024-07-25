@@ -6,37 +6,30 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SerpentEngine { 
-    public class Sound : Component
+namespace SerpentEngine;  
+public class Sound : Component
+{
+    public string Path { get; private set; } = "";
+    public float Volume { get; private set; } = 1f;
+    public bool IsPlaying { get; private set; } = false;
+    public SoundEffect SoundEffect { get; private set; }
+    public Sound(string path) : base(false)
     {
-        public string Path { get; set; } = "";
-        public float Volume { get; private set; } = 1f;
+        FileStream fileStream = new FileStream(path + ".wav", FileMode.Open);
+        SoundEffect = SoundEffect.FromStream(fileStream);
 
-        public bool isPlaying { get; set; } = false;
+    }
 
-        public SoundEffect SoundEffect { get; set; }
-
-        public Sound(string path) : base(false)
-        {
-            FileStream fileStream = new FileStream(path + ".wav", FileMode.Open);
-            SoundEffect = SoundEffect.FromStream(fileStream);
-
-        }
-
-        public void ChangeVolume(float volume)
-        {
-            Volume = volume;
-            SoundEffect.MasterVolume = Volume;
-        }
+    public void ChangeVolume(float volume)
+    {
+        Volume = volume;
+        SoundEffect.MasterVolume = Volume;
+    }
 
 
-        public virtual void Play()
-        {
-            SoundEffect.Play();
-            isPlaying = true;
-        }
-
-
-
+    public virtual void Play()
+    {
+        SoundEffect.Play();
+        IsPlaying = true;
     }
 }
