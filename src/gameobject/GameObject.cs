@@ -26,6 +26,11 @@ public class GameObject
     {
     }
 
+    public static GameObject Empty()
+    {
+        return new GameObject();
+    }
+
     public void AddComponent(Component component)
     {
         Components.AddComponent(component);

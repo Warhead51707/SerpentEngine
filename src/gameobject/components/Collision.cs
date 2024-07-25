@@ -22,7 +22,7 @@ namespace SerpentEngine
             
         }
 
-        public bool CheckCollision(GameObject target)
+        public bool GetCollision(GameObject target)
         {
             if (Box.Intersects(target.GetComponent<Collision>().Box))
             {
