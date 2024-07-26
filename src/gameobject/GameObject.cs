@@ -26,6 +26,11 @@ public class GameObject
     {
     }
 
+    public void Draw()
+    {
+        Components.Draw();
+    }
+
     public static GameObject Empty()
     {
         return new GameObject();

@@ -31,6 +31,18 @@ public class Sprite : Component
         fileStream.Close();
     }
 
+    public Sprite Clone()
+    {
+        Sprite sprite = new Sprite(Path);
+
+        sprite.Scale = Scale;
+        sprite.Coordinates = Coordinates;
+        sprite.Rotation = Rotation;
+        sprite.Layer = Layer;
+
+        return sprite;
+    }
+
     public override void Draw()
     {
         if (!Enabled) return;

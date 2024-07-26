@@ -38,7 +38,7 @@ public abstract class Scene
 
         foreach (GameObject gameObject in GameObjects)
         {
-            gameObject.Components.Draw();
+            gameObject.Draw();
         }
 
         SerpentEngine.Draw.SpriteBatch.End();
