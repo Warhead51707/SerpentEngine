@@ -24,12 +24,8 @@ public class GameObject
 
     public virtual void Update()
     {
-        if (GetComponent<Collision>() != null)
-        {
-            GetComponent<Collision>().CheckCollision();
-        }
+        Components.Update();
     }
-
 
     public void Draw()
     {

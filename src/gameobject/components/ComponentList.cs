@@ -16,6 +16,14 @@ public class ComponentList
         GameObject = gameObject;
     }
 
+    public void Update()
+    {
+        foreach (Component component in Components)
+        {
+            component.Update();
+        }
+    }
+
     public void Draw()
     {
         foreach (Component component in Components)
