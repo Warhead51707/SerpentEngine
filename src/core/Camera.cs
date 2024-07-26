@@ -24,6 +24,7 @@ public class Camera
 
     public void Update()
     {
+        Position = target.Position;
         Matrix = Matrix.CreateTranslation(-Position.X, -Position.Y, 0) * 
             Matrix.CreateScale(Zoom) * 
             Matrix.CreateTranslation(Viewport.Width / 2, Viewport.Height / 2, 0);
