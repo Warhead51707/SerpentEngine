@@ -24,9 +24,9 @@ public class GameObject
 
     public virtual void Update()
     {
-        if (GetComponent<Collison>() != null)
+        if (GetComponent<Collision>() != null)
         {
-            GetComponent<Collison>().CheckCollision();
+            GetComponent<Collision>().CheckCollision();
         }
     }
 

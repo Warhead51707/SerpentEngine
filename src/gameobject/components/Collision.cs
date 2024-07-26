@@ -9,13 +9,13 @@ namespace SerpentEngine
 {
 
     public delegate void CollisionEvent(GameObject target);
-    public class Collison : Component
+    public class Collision : Component
     {
 
         public event CollisionEvent OnCollide;
         public Rectangle Box { get; set; } = Rectangle.Empty;
 
-        public Collison(Vector2 position ,Vector2 dimensions) : base(false)
+        public Collision(Vector2 position ,Vector2 dimensions) : base(false)
         {
             Box = new Rectangle((int)position.X, (int)position.Y, (int)dimensions.X, (int)dimensions.Y);
         }
@@ -31,9 +31,9 @@ namespace SerpentEngine
         {
             foreach (GameObject target in SceneManager.CurrentScene.GameObjects)
             {
-                if (target.GetComponent<Collison>() != null)
+                if (target.GetComponent<Collision>() != null)
                 {
-                    if (Box.Intersects(target.GetComponent<Collison>().Box))
+                    if (Box.Intersects(target.GetComponent<Collision>().Box))
                     {
                         OnCollide?.Invoke(target);
 
@@ -45,9 +45,9 @@ namespace SerpentEngine
             return false;
         }
 
-        public static Collison Empty()
+        public static Collision Empty()
         {
-            return new Collison(Vector2.Zero, Vector2.Zero);
+            return new Collision(Vector2.Zero, Vector2.Zero);
         }
 
     }
