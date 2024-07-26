@@ -5,49 +5,50 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SerpentEngine;
-
-public delegate void CollisionEvent(GameObject target);
-
-public class Collision : Component
+namespace SerpentEngine
 {
 
-    public event CollisionEvent OnCollide;
-    public Rectangle Box { get; set; } = Rectangle.Empty;
-
-    public Collision(Vector2 position ,Vector2 dimensions) : base(false)
+    public delegate void CollisionEvent(GameObject target);
+    public class Collison : Component
     {
-        Box = new Rectangle((int)position.X, (int)position.Y, (int)dimensions.X, (int)dimensions.Y);
-    }
 
-    public override void Update()
-    {
-        base.Update();
+        public event CollisionEvent OnCollide;
+        public Rectangle Box { get; set; } = Rectangle.Empty;
 
-        CheckCollision();
-    }
-
-    public bool CheckCollision()
-    {
-        foreach (GameObject target in SceneManager.CurrentScene.GameObjects)
+        public Collison(Vector2 position ,Vector2 dimensions) : base(false)
         {
-            if (target.GetComponent<Collision>() != null)
-            {
-                if (Box.Intersects(target.GetComponent<Collision>().Box))
-                {
-                    OnCollide?.Invoke(target);
-
-                    return true;
-                }
-            }
+            Box = new Rectangle((int)position.X, (int)position.Y, (int)dimensions.X, (int)dimensions.Y);
         }
 
-        return false;
-    }
+        public override void Update()
+        {
+            base.Update();
 
-    public static Collision Empty()
-    {
-        return new Collision(Vector2.Zero, Vector2.Zero);
-    }
+            
+        }
 
+        public bool CheckCollision()
+        {
+            foreach (GameObject target in SceneManager.CurrentScene.GameObjects)
+            {
+                if (target.GetComponent<Collison>() != null)
+                {
+                    if (Box.Intersects(target.GetComponent<Collison>().Box))
+                    {
+                        OnCollide?.Invoke(target);
+
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+        }
+
+        public static Collison Empty()
+        {
+            return new Collison(Vector2.Zero, Vector2.Zero);
+        }
+
+    }
 }
