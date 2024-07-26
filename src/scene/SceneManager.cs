@@ -11,7 +11,7 @@ public class SceneManager
     // All Scenes in the game
     public Dictionary<string, Scene> Scenes { get; private set; } = new Dictionary<string, Scene>();
 
-    public Scene CurrentScene { get; private set; }
+    public static Scene CurrentScene { get; private set; }
 
     public SceneManager()
     {
