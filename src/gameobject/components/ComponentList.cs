@@ -21,7 +21,7 @@ public class ComponentList
         foreach (Component component in Components)
         {
             
-            if (component.Visible)
+            if (component.Drawable)
             {
                 component.Draw();
             }
