@@ -11,11 +11,11 @@ public abstract class Component
     public GameObject GameObject { get; private set; }
     public ComponentList SubComponents { get; private set; } = new ComponentList();
     public bool Enabled { get; set; } = true;
-    public bool Visible { get; private set; } = true;
+    public bool Drawable { get; private set; } = true;
 
-    public Component(bool visible)
+    public Component(bool drawable)
     {
-        Visible = visible;
+        Drawable = drawable;
     }
 
     public virtual void Add(GameObject gameObject)
