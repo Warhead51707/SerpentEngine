@@ -46,12 +46,12 @@ public abstract class Scene
 
     public virtual void Update()
     {
-        Camera.Update();
-
         foreach (GameObject gameObject in GameObjects)
         {
             gameObject.Update();
         }
+
+        Camera.Update();
     }
 
     public T CreateAndAddGameObject<T>() where T : GameObject, new()

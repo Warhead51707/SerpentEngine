@@ -40,5 +40,10 @@ public class Camera
     {
         target = null;
     }
+
+    public Vector2 GetScreenPostion()
+    {
+        return new Vector2(Matrix.Translation.X, Matrix.Translation.Y);
+    }
 }
 

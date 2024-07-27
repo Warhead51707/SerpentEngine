@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,6 +12,7 @@ public class TileGrid : Component
     public List<TileSet> TileSets { get; private set; } = new List<TileSet>();
     public Dictionary<Vector2, Tile> Tiles { get; private set; } = new Dictionary<Vector2, Tile>();
     public Vector2 TileSize { get; private set; }
+    public int VisibleTiles { get; private set; }
 
     public TileGrid(Vector2 tileSize) : base(true)
     {
@@ -87,11 +89,65 @@ public class TileGrid : Component
         return new Vector2(gridCoordinates.X * TileSize.X, gridCoordinates.Y * TileSize.Y);
     }
 
+    public override void Update()
+    {
+        VisibleTiles = 0;
+
+        Camera camera = SceneManager.CurrentScene.Camera;
+
+        Vector2 cameraPosition = camera.GetScreenPostion();
+        Vector2 cameraGridPosition = ConvertWorldCoordinatesToGridCoordinates(cameraPosition);
+
+        float cameraWidth = camera.Viewport.Width / camera.Zoom;
+        float cameraHeight = camera.Viewport.Height / camera.Zoom;
+
+        int horizontalTileCount = (int)(cameraWidth / TileSize.X) + 4;
+        int verticalTileCount = (int)(cameraHeight / TileSize.Y) + 4;
+
+        int horizontalStart = (int)Math.Ceiling(-cameraGridPosition.X / (int)camera.Zoom) - 2;
+        int verticalStart = (int)Math.Ceiling(-cameraGridPosition.Y / (int)camera.Zoom) - 2;
+
+        for (int y = 0; y < verticalTileCount; y++)
+        {
+            for (int x = 0; x < horizontalTileCount; x++)
+            {
+                Vector2 gridCoordinates = new Vector2(horizontalStart + x, verticalStart + y);
+
+                if (Tiles.ContainsKey(gridCoordinates))
+                {
+                    VisibleTiles++; 
+                }
+            }
+        }
+    }
+
     public override void Draw()
     {
-        foreach (Tile tile in Tiles.Values)
+        Camera camera = SceneManager.CurrentScene.Camera;
+
+        Vector2 cameraPosition = camera.GetScreenPostion();
+        Vector2 cameraGridPosition = ConvertWorldCoordinatesToGridCoordinates(cameraPosition);
+
+        float cameraWidth = camera.Viewport.Width / camera.Zoom;
+        float cameraHeight = camera.Viewport.Height / camera.Zoom;
+
+        int horizontalTileCount = (int)(cameraWidth / TileSize.X) + 4;
+        int verticalTileCount = (int)(cameraHeight / TileSize.Y) + 4;
+
+        int horizontalStart = (int)Math.Ceiling(-cameraGridPosition.X / (int)camera.Zoom) - 2;
+        int verticalStart = (int)Math.Ceiling(-cameraGridPosition.Y / (int)camera.Zoom) - 2;
+
+        for (int y = 0; y < verticalTileCount; y++)
         {
-            tile.Draw();
+            for (int x = 0; x < horizontalTileCount; x++)
+            {
+                Vector2 gridCoordinates = new Vector2(horizontalStart + x, verticalStart + y);
+
+                if (Tiles.ContainsKey(gridCoordinates))
+                {
+                    Tiles[gridCoordinates].Draw();
+                }
+            }
         }
     }
 }

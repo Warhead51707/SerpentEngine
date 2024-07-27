@@ -53,6 +53,16 @@ public class DebugGui : ImGuiDrawable
                     ImGui.Text(component.ToString());
                 }
 
+                foreach (Component component in gameObject.Components.Components)
+                {
+                    if (component is TileGrid tilegrid)
+                    {
+                        ImGui.SeparatorText("TileGrid");
+
+                        ImGui.Text("Visible Tiles: " + tilegrid.VisibleTiles);
+                    }
+                }
+
                 ImGui.SeparatorText("Actions");
 
                 if (ImGui.Button("Remove"))
