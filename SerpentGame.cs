@@ -14,8 +14,12 @@ namespace SerpentEngine
         public static ImGuiManager ImGuiManager { get; private set; } = new ImGuiManager();
 
         // Properties
+        public static int FPS { get; private set; }
         public static GameTime GameTime { get; private set; }
         public static float DeltaTime { get; private set; }
+
+        private int frameCount;
+        private float elapsedTime;
 
         public SerpentGame(string windowTitle)
         {
@@ -46,6 +50,18 @@ namespace SerpentEngine
 
         protected override void Update(GameTime gameTime)
         {
+            // FPS Calculation
+            frameCount++;
+            elapsedTime += (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+            if (elapsedTime >= 1)
+            {
+                FPS = (int)(frameCount / elapsedTime);
+                frameCount = 0;
+                elapsedTime = 0;
+            }
+            //
+
             GameTime = gameTime;
             DeltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
 

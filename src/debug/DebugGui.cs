@@ -3,11 +3,17 @@
 namespace SerpentEngine;
 public class DebugGui : ImGuiDrawable
 {
+    private bool showGeneralWindow = false;
     private bool showGameObjectsWindow = false;
 
     public override void Draw()
     {
        MainMenuBar();
+
+       if (showGeneralWindow)
+       {
+           GeneralWindow();
+       }
 
        if (showGameObjectsWindow)
        {
@@ -19,14 +25,38 @@ public class DebugGui : ImGuiDrawable
     {
         if (ImGui.BeginMainMenuBar())
         {
+            if (ImGui.BeginMenu("Game"))
+            {
+               if (ImGui.MenuItem("General"))
+                {
+                    showGeneralWindow = true;
+                }
+
+               ImGui.EndMenu();
+            }
+
             if (ImGui.BeginMenu("Scene"))
             {
                 if (ImGui.MenuItem("GameObjects"))
                 {
                     showGameObjectsWindow = true;
                 }
+
+                ImGui.EndMenu();
             }
+
+            ImGui.EndMainMenuBar();
         }
+    }
+
+    public void GeneralWindow()
+    {
+        ImGui.Begin("General", ref showGeneralWindow);
+
+        ImGui.Text("FPS: " + SerpentGame.FPS);
+        ImGui.Text("Current Scene: " + SceneManager.CurrentScene.Name);
+
+        ImGui.End();
     }
 
     public void GameObjectsWindow()
