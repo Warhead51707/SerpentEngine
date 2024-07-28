@@ -1,17 +1,11 @@
 ﻿using Microsoft.Xna.Framework;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SerpentEngine;
 public class GameObject
 {
     public ComponentList Components { get; private set; }
-
     public Vector2 Position { get; set; } = Vector2.Zero;
+    public float Layer { get; set; } = 0;
 
     public GameObject()
     {
@@ -35,6 +29,13 @@ public class GameObject
     public static GameObject Empty()
     {
         return new GameObject();
+    }
+
+    public T CreateAndAddComponent<T>() where T : Component, new()
+    {
+        AddComponent(new T());
+
+        return GetComponent<T>();
     }
 
     public void AddComponent(Component component)

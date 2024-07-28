@@ -1,0 +1,39 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Animation",
+  "description": "Schema for animation files",
+  "type": "object",
+  "properties": {
+    "spritesheet": {
+      "description": "Path to the spritesheet",
+      "type": "string"
+    },
+    "frame_size": {
+      "description": "Size of each frame in the spritesheet",
+      "type": "object",
+      "properties": {
+        "width": {
+          "description": "Width of each frame",
+          "type": "integer",
+          "minimum": 1
+        },
+        "height": {
+          "description": "Height of each frame",
+          "type": "integer",
+          "minimum": 1
+        }
+      },
+      "required": [ "width", "height" ]
+    },
+    "frame_length": {
+      "description": "Length of each frame in seconds",
+      "type": "number",
+      "minimum": 0
+    },
+    "loop": {
+      "description": "Whether the animation should loop",
+      "type": "boolean"
+    }
+  },
+  "required": [ "spritesheet", "frame_size", "frame_length", "loop" ]
+}

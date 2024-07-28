@@ -1,11 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SerpentEngine;
 public class Camera
@@ -15,7 +9,7 @@ public class Camera
     public Viewport Viewport { get; private set; }
     public Matrix Matrix { get; private set; } = Matrix.Identity;
 
-    private GameObject target;
+    private GameObject target = GameObject.Empty();
 
     public Camera()
     {

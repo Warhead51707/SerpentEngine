@@ -1,10 +1,4 @@
 ﻿using Microsoft.Xna.Framework;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SerpentEngine;
 
@@ -14,12 +8,13 @@ public class SpriteSheet : Component
     public Vector2 Size { get; set; } = Vector2.Zero;
     public Vector2 TileSize { get; set; } = Vector2.Zero;
 
-    public SpriteSheet(string path, Vector2 tileSize, Vector2 size) : base(true)
+    public SpriteSheet(string path, Vector2 tileSize) : base(true)
     {
-        Size = size;
         TileSize = tileSize;
 
         CurrentSprite = new Sprite(path);
+
+        Size = CurrentSprite.Size / TileSize;
 
         SubComponents.AddComponent(CurrentSprite);
     }

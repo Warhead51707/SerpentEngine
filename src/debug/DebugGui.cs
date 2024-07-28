@@ -1,5 +1,4 @@
 ﻿using ImGuiNET;
-using SerpentEngine;
 
 namespace SerpentEngine;
 public class DebugGui : ImGuiDrawable

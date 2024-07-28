@@ -1,10 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SerpentEngine;
 public class TileGrid : Component
@@ -46,6 +42,8 @@ public class TileGrid : Component
         }
 
         Tile placedTile = tileSetTile.Clone();
+
+        placedTile.Layer = GameObject.Layer;
 
         placedTile.Position = ConvertGridCoordinatesToWorldCoordinates(coordinates);
 
