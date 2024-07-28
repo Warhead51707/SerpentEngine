@@ -14,7 +14,7 @@ public class Sprite : Component
     public float Rotation { get; set; } = 0f;
 
     
-    private readonly Texture2D texture2d;
+    private Texture2D texture2d;
 
     public Sprite(string path) : base(true)
     {
@@ -30,6 +30,10 @@ public class Sprite : Component
     public void ChangePath(string path)
     {
         Path = path;
+
+        FileStream fileStream = new FileStream(path + ".png", FileMode.Open, FileAccess.Read);
+        texture2d = Texture2D.FromStream(SerpentGame.Instance.GraphicsDevice, fileStream);
+        fileStream.Close();
     }
 
     public Sprite Clone()
