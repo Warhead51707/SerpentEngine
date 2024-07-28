@@ -74,6 +74,7 @@ public class DebugGui : ImGuiDrawable
                 ImGui.SeparatorText("Properties");
 
                 ImGui.Text("Position: " + gameObject.Position);
+                ImGui.Text("Layer: " + gameObject.Layer);
 
                 ImGui.SeparatorText("Components");
 
@@ -90,6 +91,43 @@ public class DebugGui : ImGuiDrawable
 
                         ImGui.Text("Visible Tiles: " + tilegrid.VisibleTiles);
                     }
+
+                    if (component is AnimationTree animationTree)
+                    {
+                        ImGui.SeparatorText("AnimationTree");
+
+                        ImGui.Text("Total Animations: " + animationTree.Animations.Count);
+                        ImGui.Text("Current Animation: " + animationTree.CurrentAnimation.Path);
+                    }
+
+                    if (component is StateMachine stateMachine)
+                    {
+                        ImGui.SeparatorText("StateMachine");
+
+                        ImGui.Text("Total States: " + stateMachine.States.Count);
+                        ImGui.Text("Current State: " + stateMachine.CurrentState.Name);
+                    }
+
+                    if (component is Sprite sprite)
+                    {
+                        ImGui.SeparatorText("Sprite");
+
+                        ImGui.Text("Path: " + sprite.Path);
+                        ImGui.Text("Size: " + sprite.Size);
+                        ImGui.Text("Scale: " + sprite.Scale);
+                        ImGui.Text("Coordinates: " + sprite.Coordinates);
+                        ImGui.Text("Rotation: " + sprite.Rotation);
+                    }
+
+                    if (component is SpriteSheet spriteSheet)
+                    {
+                        ImGui.SeparatorText("SpriteSheet");
+
+                        ImGui.Text("Size: " + spriteSheet.Size);
+                        ImGui.Text("TileSize: " + spriteSheet.TileSize);
+                        ImGui.Text("Path: " + spriteSheet.CurrentSprite.Path);
+                        ImGui.Text("Coordinates: " + spriteSheet.CurrentSprite.Coordinates);
+                    }
                 }
 
                 ImGui.SeparatorText("Actions");
@@ -102,5 +140,7 @@ public class DebugGui : ImGuiDrawable
                 }
             }
         }
+
+        ImGui.End();
     }
 }

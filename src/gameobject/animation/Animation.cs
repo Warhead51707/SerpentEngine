@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 namespace SerpentEngine;
 public class Animation
 {
+    public string Path { get; private set; }
     public SpriteSheet SpriteSheet { get; private set; }
     public Vector2 FrameSize { get; private set; }
     public float FrameLength { get; private set; }
@@ -14,6 +15,8 @@ public class Animation
 
     public Animation(string path)
     {
+        Path = path;
+
         string jsonFileContents = File.ReadAllText(path + ".json");
         AnimationModel animationModel = JsonSerializer.Deserialize<AnimationModel>(jsonFileContents);
 
