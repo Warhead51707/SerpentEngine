@@ -105,6 +105,11 @@ public class SerpentMouse
         return holding;
     }
 
+    public Vector2 GetNewPosition()
+    {
+        return newMousePos;
+    }
+
     public bool LeftClickRelease()
     {
         if (newMouse.LeftButton == ButtonState.Released && oldMouse.LeftButton == ButtonState.Pressed)

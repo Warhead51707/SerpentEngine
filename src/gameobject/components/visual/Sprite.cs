@@ -27,6 +27,11 @@ public class Sprite : Component
         Size = new Vector2(texture2d.Width, texture2d.Height);
     }
 
+    public void ChangePath(string path)
+    {
+        Path = path;
+    }
+
     public Sprite Clone()
     {
         Sprite sprite = new Sprite(Path);
