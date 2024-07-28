@@ -43,6 +43,8 @@ public class Animation
 
                     await Task.Delay((int)(FrameLength * 1000));  
                 }
+
+                if (!Loop) break;
             }
         });
     }
