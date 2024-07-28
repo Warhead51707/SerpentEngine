@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -30,7 +31,14 @@ public class StateMachine : Component
             CurrentState.Exit();
         }
 
-        CurrentState = States[name];
+        try
+        {
+            CurrentState = States[name];
+        }
+        catch
+        {
+            Debug.WriteLine("State " + "'" + name + "' does not exist!");
+        }
 
         CurrentState.Enter();
     }
