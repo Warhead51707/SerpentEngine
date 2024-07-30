@@ -10,6 +10,7 @@ public class TileGrid : Component
     public Dictionary<Vector2, Tile> Tiles { get; private set; } = new Dictionary<Vector2, Tile>();
     public Vector2 TileSize { get; private set; }
     public int VisibleTiles { get; private set; }
+    public int Layer { get; set; } = 0;
 
     public TileGrid(Vector2 tileSize) : base(true)
     {
@@ -46,7 +47,7 @@ public class TileGrid : Component
         Tile placedTile = matchedTileSet.GetNewInstance(tileName);
         placedTile.Load();
 
-        placedTile.Layer = GameObject.Layer;
+        placedTile.Layer = Layer;
 
         placedTile.Position = ConvertGridCoordinatesToWorldCoordinates(coordinates);
 
