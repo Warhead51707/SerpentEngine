@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace SerpentEngine;
 public class AnimationTree : Component
@@ -11,19 +12,20 @@ public class AnimationTree : Component
     {
     }
 
-    public void AddAnimation(string path, bool condition)
+    public void AddAnimation(string path, Predicate<bool> condition)
     {
         Animation animation = new Animation(path);
         animation.SpriteSheet.Add(GameObject);
 
-        Animations.Add(_ => condition, animation);
+        Animations.Add(condition, animation);
     }
 
     public override void Update()
     {
-       foreach (KeyValuePair<Predicate<bool>, Animation> animation in Animations)
+
+        foreach (KeyValuePair<Predicate<bool>, Animation> animation in Animations)
         {
-            if (!animation.Key.Invoke(true)) continue;
+            if (!animation.Key(true)) continue;
 
             if (CurrentAnimation != null)
             {
@@ -33,7 +35,6 @@ public class AnimationTree : Component
             }
 
             CurrentAnimation = animation.Value;
-
             CurrentAnimation.Play();
         }
     }
