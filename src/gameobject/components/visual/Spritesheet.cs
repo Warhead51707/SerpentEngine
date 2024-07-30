@@ -1,4 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
+using static System.Formats.Asn1.AsnWriter;
+using System.IO;
 
 namespace SerpentEngine;
 
@@ -23,6 +25,7 @@ public class SpriteSheet : Component
     {
         CurrentSprite.Coordinates = coordinates;
     }
+
 
     public void ChangeCoordinates(int coordinates)
     {
