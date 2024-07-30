@@ -8,7 +8,7 @@ public class TileSet
 {
     public List<Tile> Tiles { get; private set; } = new List<Tile>();
 
-    private Dictionary<string, Func<Tile>> tileRegistry = new Dictionary<string, Func<Tile>>();
+    public Dictionary<string, Func<Tile>> TileRegistry { get; private set; } = new Dictionary<string, Func<Tile>>();
 
     public void Add(Tile tile)
     {
@@ -17,7 +17,7 @@ public class TileSet
 
     public void Add(string tileName, Func<Tile> tile)
     {
-        tileRegistry.Add(tileName, tile);
+        TileRegistry.Add(tileName, tile);
     }
 
     public void AddFromSprite(string tileName, string spritePath)
@@ -50,7 +50,7 @@ public class TileSet
 
     public Tile GetNewInstance(string tileName)
     {
-       Tile tile = tileRegistry[tileName]();
+       Tile tile = TileRegistry[tileName]();
 
        return tile;
     } 

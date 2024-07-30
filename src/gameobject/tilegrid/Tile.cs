@@ -25,13 +25,8 @@ public class Tile : GameObject
         Name = name;
     }
 
-    public Tile Clone()
-    {
-        Tile tile = new Tile(Sprite.Clone(), Name);
-        tile.Position = Position;
 
-        return tile;
-    }
+
 
     public override void Update()
     {

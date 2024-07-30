@@ -27,9 +27,10 @@ public class TileGrid : Component
 
         foreach (TileSet tileSet in TileSets)
         {
-            foreach (Tile tile in tileSet.Tiles)
+            foreach (KeyValuePair<string, Func<Tile>> tile in tileSet.TileRegistry)
             {
-                if (tile.Name == tileName)
+                Tile tile_ = tile.Value();
+                if (tile_.Name == tileName)
                 {
                     matchedTileSet = tileSet;
                     break;
@@ -43,6 +44,7 @@ public class TileGrid : Component
         }
 
         Tile placedTile = matchedTileSet.GetNewInstance(tileName);
+        placedTile.Load();
 
         placedTile.Layer = GameObject.Layer;
 
@@ -54,7 +56,7 @@ public class TileGrid : Component
         }
         else
         {
-            Tiles.Add(coordinates, placedTile.Clone());
+            Tiles.Add(coordinates, placedTile);
 
 
         }
