@@ -10,11 +10,6 @@ public class TileSet
 
     public Dictionary<string, Func<Tile>> TileRegistry { get; private set; } = new Dictionary<string, Func<Tile>>();
 
-    public void Add(Tile tile)
-    {
-        Tiles.Add(tile);
-    }
-
     public void Add(string tileName, Func<Tile> tile)
     {
         TileRegistry.Add(tileName, tile);
@@ -22,13 +17,19 @@ public class TileSet
 
     public void AddFromSprite(string tileName, string spritePath)
     {
-        Sprite sprite = new Sprite(spritePath);
-
-        Tile tile = new Tile(sprite, tileName);
+        Tile tile = new Tile(tileName);
 
         Tiles.Add(tile);
 
-        Add(tileName, () => new Tile(new Sprite(spritePath), tileName));
+        Add(tileName, () =>
+        {
+            Tile newTile = new Tile(tileName);
+
+            Sprite sprite = new Sprite(spritePath);
+            newTile.AddComponent(sprite);
+
+            return newTile;
+        });
     }
 
     public void AddFromSpriteSheet(string sheetName, SpriteSheet spriteSheet)
@@ -41,9 +42,18 @@ public class TileSet
 
                 Sprite sprite = spriteSheet.CurrentSprite.Clone();
 
-                Tile tile = new Tile(sprite, sheetName + "_" + x + "_" + y);
+                Tile tile = new Tile(sheetName + "_" + x + "_" + y);
 
                 Tiles.Add(tile);
+
+                Add(sheetName + "_" + x + "_" + y, () =>
+                {
+                    Tile newTile = new Tile(sheetName + "_" + x + "_" + y);
+
+                    newTile.AddComponent(sprite.Clone());
+
+                    return newTile;
+                });
             }
         }
     }
