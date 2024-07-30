@@ -48,8 +48,8 @@ public class TileGrid : Component
 
         placedTile.Position = ConvertGridCoordinatesToWorldCoordinates(coordinates);
 
-        Debug.WriteLine("Placed tile: " + placedTile.Name + " at " + coordinates);
-        Debug.WriteLine(placedTile.Position);
+
+        // Debug.WriteLine("Placed tile: " + placedTile.Name + " at " + coordinates);
 
         if (Tiles.ContainsKey(coordinates))
         {
@@ -57,9 +57,13 @@ public class TileGrid : Component
         }
         else
         {
-            Tiles.Add(coordinates, placedTile);
+            Tiles.Add(coordinates, placedTile.Clone());
+
+
         }
+
     }
+
 
     public void PlaceTiles(Vector2 startCoordinates, Vector2 endCoordinates, string tileName)
     {
@@ -68,8 +72,12 @@ public class TileGrid : Component
             for (int x = (int)startCoordinates.X; x <= endCoordinates.X; x++)
             {
                 PlaceTile(new Vector2(x, y), tileName);
+
+
             }
         }
+
+
     }
 
     public void RemoveTile(Vector2 coordinates)
@@ -118,6 +126,7 @@ public class TileGrid : Component
 
     public override void Update()
     {
+
         VisibleTiles = 0;
 
         Camera camera = SceneManager.CurrentScene.Camera;

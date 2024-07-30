@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,5 +23,18 @@ public class Tile : GameObject
     public Tile(string name)
     {
         Name = name;
+    }
+
+    public Tile Clone()
+    {
+        Tile tile = new Tile(Sprite.Clone(), Name);
+        tile.Position = Position;
+
+        return tile;
+    }
+
+    public override void Update()
+    {
+        base.Update();
     }
 }

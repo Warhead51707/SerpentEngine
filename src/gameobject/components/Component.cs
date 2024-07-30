@@ -1,4 +1,6 @@
 ﻿
+using System.Diagnostics;
+
 namespace SerpentEngine;
 public abstract class Component
 {
@@ -18,7 +20,9 @@ public abstract class Component
         SubComponents.SetGameObject(gameObject);
     }
 
-    public virtual void Update() { }
+    public virtual void Update() {
+
+    }
 
     public virtual void Draw()
     {
