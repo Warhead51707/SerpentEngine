@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace SerpentEngine;
 public class TileGrid : Component
@@ -22,7 +23,7 @@ public class TileGrid : Component
 
     public void PlaceTile(Vector2 coordinates, string tileName)
     {
-        Tile tileSetTile = null;
+        TileSet matchedTileSet = null;
 
         foreach (TileSet tileSet in TileSets)
         {
@@ -30,22 +31,25 @@ public class TileGrid : Component
             {
                 if (tile.Name == tileName)
                 {
-                    tileSetTile = tile;
+                    matchedTileSet = tileSet;
                     break;
                 }
             }
 
-            if (tileSetTile != null)
+            if (matchedTileSet != null)
             {
                 break;
             }
         }
 
-        Tile placedTile = tileSetTile.Clone();
+        Tile placedTile = matchedTileSet.GetNewInstance(tileName);
 
         placedTile.Layer = GameObject.Layer;
 
         placedTile.Position = ConvertGridCoordinatesToWorldCoordinates(coordinates);
+
+        Debug.WriteLine("Placed tile: " + placedTile.Name + " at " + coordinates);
+        Debug.WriteLine(placedTile.Position);
 
         if (Tiles.ContainsKey(coordinates))
         {
