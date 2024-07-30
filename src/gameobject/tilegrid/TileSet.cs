@@ -1,14 +1,23 @@
 ﻿using Microsoft.Xna.Framework;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace SerpentEngine;
 public class TileSet
 {
     public List<Tile> Tiles { get; private set; } = new List<Tile>();
 
+    private Dictionary<string, Func<Tile>> tileRegistry = new Dictionary<string, Func<Tile>>();
+
     public void Add(Tile tile)
     {
         Tiles.Add(tile);
+    }
+
+    public void Add(string tileName, Func<Tile> tile)
+    {
+        tileRegistry.Add(tileName, tile);
     }
 
     public void AddFromSprite(string tileName, string spritePath)
@@ -18,6 +27,10 @@ public class TileSet
         Tile tile = new Tile(sprite, tileName);
 
         Tiles.Add(tile);
+
+        Add(tileName, () => new Tile(sprite, tileName));
+
+        Debug.WriteLine("Added tile: " + tileName);
     }
 
     public void AddFromSpriteSheet(string sheetName, SpriteSheet spriteSheet)
@@ -36,4 +49,11 @@ public class TileSet
             }
         }
     }
+
+    public Tile GetNewInstance(string tileName)
+    {
+       Tile tile = tileRegistry[tileName]();
+
+       return tile;
+    } 
 }

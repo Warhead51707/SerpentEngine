@@ -19,10 +19,8 @@ public class Tile : GameObject
         AddComponent(Sprite);
     }
 
-    public Tile Clone()
+    public Tile(string name)
     {
-        Tile tile = new Tile(Sprite.Clone(), Name);
-
-        return tile;
+        Name = name;
     }
 }
