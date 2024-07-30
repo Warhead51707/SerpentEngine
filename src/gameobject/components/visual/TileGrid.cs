@@ -48,9 +48,6 @@ public class TileGrid : Component
 
         placedTile.Position = ConvertGridCoordinatesToWorldCoordinates(coordinates);
 
-
-        // Debug.WriteLine("Placed tile: " + placedTile.Name + " at " + coordinates);
-
         if (Tiles.ContainsKey(coordinates))
         {
             Tiles[coordinates] = placedTile;

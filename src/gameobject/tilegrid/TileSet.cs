@@ -28,9 +28,7 @@ public class TileSet
 
         Tiles.Add(tile);
 
-        Add(tileName, () => new Tile(sprite, tileName));
-
-        Debug.WriteLine("Added tile: " + tileName);
+        Add(tileName, () => new Tile(new Sprite(spritePath), tileName));
     }
 
     public void AddFromSpriteSheet(string sheetName, SpriteSheet spriteSheet)
