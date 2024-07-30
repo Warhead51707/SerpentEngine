@@ -7,9 +7,6 @@ public class GameObject
     public Vector2 Position { get; set; } = Vector2.Zero;
     public float Layer { get; set; } = 0;
 
-    public string Name { get; set; } = "";
-
-
     public GameObject()
     {
         Components = new ComponentList(this);
@@ -62,5 +59,16 @@ public class GameObject
     public T GetComponent<T>() where T : Component
     {
         return Components.GetComponent<T>();
+    }
+
+    public virtual void OnRemove()
+    {
+    }
+
+    public void Remove()
+    {
+        OnRemove();
+
+        SceneManager.CurrentScene.Remove(this);
     }
 }

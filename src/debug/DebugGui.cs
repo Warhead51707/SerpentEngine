@@ -134,7 +134,7 @@ public class DebugGui : ImGuiDrawable
 
                 if (ImGui.Button("Remove"))
                 {
-                    SceneManager.CurrentScene.Remove(gameObject);
+                    gameObject.Remove();
 
                     break;
                 }

@@ -70,6 +70,10 @@ public class TileGrid : Component
 
     public void RemoveTile(Vector2 coordinates)
     {
+        Tile tile = Tiles[coordinates];
+
+        tile.OnRemove();
+
         Tiles.Remove(coordinates);
     }
 
@@ -82,6 +86,20 @@ public class TileGrid : Component
                 RemoveTile(new Vector2(x, y));
             }
         }
+    }
+
+    public List<Tile> GetTiles()
+    {
+        List<Tile> tiles = new List<Tile>();
+
+        foreach (KeyValuePair<Vector2, Tile> tileEntry in Tiles)
+        {
+            Tile tile = tileEntry.Value;
+
+            tiles.Add(tile);
+        }
+
+        return tiles;
     }
 
     public Vector2 ConvertWorldCoordinatesToGridCoordinates(Vector2 worldCoordinates)
@@ -120,6 +138,7 @@ public class TileGrid : Component
 
                 if (Tiles.ContainsKey(gridCoordinates))
                 {
+                    Tiles[gridCoordinates].Update();
                     VisibleTiles++; 
                 }
             }
