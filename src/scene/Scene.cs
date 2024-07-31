@@ -78,6 +78,18 @@ public abstract class Scene
         Camera.Update();
     }
 
+    public T GetGameObject<T>() where T : GameObject
+    {
+        foreach (GameObject gameObject in GameObjects)
+        {
+            if (gameObject is T)
+            {
+                return (T)gameObject;
+            }
+        }
+        return null;
+    }
+
     public T CreateAndAddGameObject<T>() where T : GameObject, new()
     {
         T gameObject = new T();
