@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 
@@ -10,13 +11,16 @@ public class SerpentMouse
 
     private Vector2 newMousePos, oldMousePos, firstMousePos;
     private Vector2 newMouseAdjustedPos, systemCursorPos, screenLoc;
-    private MouseState newMouse, oldMouse, firstMouse = Mouse.GetState();
+    private MouseState newMouse, oldMouse, firstMouse;
 
     public SerpentMouse()
     {
+        newMouse = Mouse.GetState();
         newMousePos = new Vector2(newMouse.Position.X, newMouse.Position.Y);
 
+        oldMouse = newMouse;
         oldMousePos = newMousePos;
+        firstMouse = newMouse;
         firstMousePos = newMousePos;
 
         GetMouseAndAdjust();
@@ -43,6 +47,9 @@ public class SerpentMouse
 
     public void Update()
     {
+        oldMouse = newMouse;
+        oldMousePos = newMousePos;
+
         GetMouseAndAdjust();
 
         if (newMouse.LeftButton == ButtonState.Pressed && oldMouse.LeftButton == ButtonState.Released)
@@ -50,9 +57,6 @@ public class SerpentMouse
             firstMouse = newMouse;
             firstMousePos = newMousePos = GetScreenPos(firstMouse);
         }
-
-        oldMouse = newMouse;
-        oldMousePos = GetScreenPos(oldMouse);
     }
 
     public float GetDistanceFromClick()

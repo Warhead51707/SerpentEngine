@@ -9,7 +9,7 @@ public class Camera
     public Viewport Viewport { get; private set; }
     public Matrix Matrix { get; private set; } = Matrix.Identity;
 
-    private GameObject target = GameObject.Empty();
+    private GameObject target;
 
     public Camera()
     {
@@ -18,10 +18,19 @@ public class Camera
 
     public void Update()
     {
-        Position = target.Position;
+        if (target != null)
+        {
+            Position = target.Position;
+        }
+
         Matrix = Matrix.CreateTranslation(-Position.X, -Position.Y, 0) * 
             Matrix.CreateScale(Zoom) * 
             Matrix.CreateTranslation(Viewport.Width / 2, Viewport.Height / 2, 0);
+    }
+
+    public void Translate(Vector2 translation)
+    {
+        Position += translation;
     }
 
     public void SetTarget(GameObject target)

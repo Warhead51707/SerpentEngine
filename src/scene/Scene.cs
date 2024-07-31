@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework.Graphics;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 
 namespace SerpentEngine;
@@ -10,6 +11,9 @@ public abstract class Scene
 
     // All GameObjects in the scene
     public List<GameObject> GameObjects { get; private set; } = new List<GameObject>();
+    public List<GameObject> UIElements { get; private set; } = new List<GameObject>();
+
+    private RenderTarget2D uiRenderTarget = new RenderTarget2D(SerpentGame.Instance.GraphicsDevice, GraphicsConfig.SCREEN_WIDTH, GraphicsConfig.SCREEN_HEIGHT);
 
     public bool Paused { get; private set; } = false;
 
@@ -29,6 +33,25 @@ public abstract class Scene
 
     public virtual void Draw()
     {
+        SerpentGame.Instance.GraphicsDevice.SetRenderTarget(uiRenderTarget);
+
+        SerpentGame.Instance.GraphicsDevice.Clear(Color.Transparent);
+
+        // Draw UI game objects
+        SerpentEngine.Draw.SpriteBatch.Begin(SpriteSortMode.FrontToBack, BlendState.AlphaBlend, SamplerState.PointWrap, null, null, null, Matrix.Identity);
+
+        foreach (GameObject uiElement in UIElements)
+        {
+            uiElement.Draw();
+        }
+
+        SerpentEngine.Draw.SpriteBatch.End();
+
+        SerpentGame.Instance.GraphicsDevice.SetRenderTarget(null);
+
+        SerpentGame.Instance.GraphicsDevice.Clear(Color.Black);
+
+        // Draw scene game objects
         SerpentEngine.Draw.SpriteBatch.Begin(SpriteSortMode.FrontToBack, BlendState.AlphaBlend, SamplerState.PointWrap, null, null, null, Camera.Matrix);
 
         foreach (GameObject gameObject in GameObjects)
@@ -36,6 +59,12 @@ public abstract class Scene
             gameObject.Draw();
         }
 
+        SerpentEngine.Draw.SpriteBatch.End();
+
+        // Draw UI render target
+
+        SerpentEngine.Draw.SpriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend);
+        SerpentEngine.Draw.SpriteBatch.Draw(uiRenderTarget, Vector2.Zero, Color.White);
         SerpentEngine.Draw.SpriteBatch.End();
     }
 
@@ -63,9 +92,22 @@ public abstract class Scene
         gameObject.Load();
     }
 
+    public void AddUIElement(GameObject uiElement)
+    {
+        UIElements.Add(uiElement);
+        uiElement.Load();
+    }
+
     public void Remove(GameObject gameObject)
     {
-        GameObjects.Remove(gameObject);
+        if (UIElements.Contains(gameObject))
+        {
+            UIElements.Remove(gameObject);
+        }
+        else
+        {
+            GameObjects.Remove(gameObject);
+        }
     }
 
     public void Pause()

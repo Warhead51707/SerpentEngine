@@ -140,8 +140,8 @@ public class TileGrid : Component
         int horizontalTileCount = (int)(cameraWidth / TileSize.X) + 4;
         int verticalTileCount = (int)(cameraHeight / TileSize.Y) + 4;
 
-        int horizontalStart = (int)Math.Ceiling(-cameraGridPosition.X / (int)camera.Zoom) - 2;
-        int verticalStart = (int)Math.Ceiling(-cameraGridPosition.Y / (int)camera.Zoom) - 2;
+        int horizontalStart = (int)Math.Ceiling(-cameraGridPosition.X / camera.Zoom) - 2;
+        int verticalStart = (int)Math.Ceiling(-cameraGridPosition.Y / camera.Zoom) - 2;
 
         for (int y = 0; y < verticalTileCount; y++)
         {
@@ -171,8 +171,8 @@ public class TileGrid : Component
         int horizontalTileCount = (int)(cameraWidth / TileSize.X) + 4;
         int verticalTileCount = (int)(cameraHeight / TileSize.Y) + 4;
 
-        int horizontalStart = (int)Math.Ceiling(-cameraGridPosition.X / (int)camera.Zoom) - 2;
-        int verticalStart = (int)Math.Ceiling(-cameraGridPosition.Y / (int)camera.Zoom) - 2;
+        int horizontalStart = (int)Math.Ceiling(-cameraGridPosition.X / camera.Zoom) - 2;
+        int verticalStart = (int)Math.Ceiling(-cameraGridPosition.Y / camera.Zoom) - 2;
 
         for (int y = 0; y < verticalTileCount; y++)
         {
