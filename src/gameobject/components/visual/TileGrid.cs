@@ -114,6 +114,34 @@ public class TileGrid : Component
         return tiles;
     }
 
+    public Tile GetTileFromGridCoordinates(Vector2 coordinates)
+    {
+        foreach (KeyValuePair<Vector2, Tile> tileEntry in Tiles)
+        {
+            if(ConvertWorldCoordinatesToGridCoordinates(tileEntry.Value.Position) == coordinates)
+            {
+                Tile tile = tileEntry.Value;
+                return tile;
+            }
+        }
+
+        return null;
+    }
+
+    public Tile GetTileFromWorldCoordinates(Vector2 coordinates)
+    {
+        foreach (KeyValuePair<Vector2, Tile> tileEntry in Tiles)
+        {
+            if (ConvertWorldCoordinatesToGridCoordinates(tileEntry.Value.Position) == ConvertWorldCoordinatesToGridCoordinates(coordinates))
+            {
+                Tile tile = tileEntry.Value;
+                return tile;
+            }
+        }
+
+        return null;
+    }
+
     public Vector2 ConvertWorldCoordinatesToGridCoordinates(Vector2 worldCoordinates)
     {
        return new Vector2((int)(worldCoordinates.X / TileSize.X), (int)(worldCoordinates.Y / TileSize.Y));
