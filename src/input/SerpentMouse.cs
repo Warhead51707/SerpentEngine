@@ -109,6 +109,16 @@ public class SerpentMouse
         return holding;
     }
 
+    public bool MiddleClickHold()
+    {
+        if (newMouse.MiddleButton == ButtonState.Pressed && oldMouse.MiddleButton == ButtonState.Pressed)
+        {
+            return true;
+        }
+
+        return false;
+    }
+
     public Vector2 GetNewPosition()
     {
         return newMousePos;

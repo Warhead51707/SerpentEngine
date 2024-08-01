@@ -65,7 +65,7 @@ namespace SerpentEngine
             GameTime = gameTime;
             DeltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-            Input.Update();
+            if (IsActive) Input.Update();
                 
             SceneManager.Update();
 
