@@ -7,7 +7,7 @@ public static class VectorHelper
     public static Vector2 Snap(Vector2 value, float grid)
     {
         //Snaps a coordinate to the closest designated grid square. 
-        return Vector2.Floor(value / grid + new Vector2(0.5f)) * grid;
+        return Vector2.Floor(value / grid) * grid;
     }
 
     public static float GetDistance(Vector2 pos, Vector2 target)
