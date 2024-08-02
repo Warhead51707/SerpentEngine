@@ -1,14 +1,27 @@
 ﻿using ImGuiNET;
+using System.Collections.Generic;
 
 namespace SerpentEngine;
 public class DebugGui : ImGuiDrawable
 {
+    private static List<string> logs = new List<string>();
     private bool showGeneralWindow = false;
+    private bool showConsoleWindow = false;
     private bool showGameObjectsWindow = false;
+
+    public static void Log(string message)
+    {
+        logs.Add(message);
+    }
 
     public override void Draw()
     {
        MainMenuBar();
+
+       if (showConsoleWindow)
+       {
+           ConsoleWindow();
+       }
 
        if (showGeneralWindow)
        {
@@ -32,6 +45,11 @@ public class DebugGui : ImGuiDrawable
                     showGeneralWindow = true;
                 }
 
+               if (ImGui.MenuItem("Console"))
+                {
+                    showConsoleWindow = true;
+                }
+
                ImGui.EndMenu();
             }
 
@@ -47,6 +65,18 @@ public class DebugGui : ImGuiDrawable
 
             ImGui.EndMainMenuBar();
         }
+    }
+
+    public void ConsoleWindow()
+    {
+        ImGui.Begin("Console", ref showConsoleWindow);
+
+        foreach (string log in logs)
+        {
+            ImGui.Text(log);
+        }
+
+        ImGui.End();
     }
 
     public void GeneralWindow()
