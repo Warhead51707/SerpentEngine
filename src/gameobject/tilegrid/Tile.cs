@@ -16,6 +16,12 @@ public class Tile : GameObject
         Name = name;
     }
 
+    public static new Tile Empty()
+    {
+        return new Tile("");
+    }
+
+
     public override void Update()
     {
         base.Update();
