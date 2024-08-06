@@ -97,9 +97,11 @@ public class DebugGui : ImGuiDrawable
 
         ImGui.SeparatorText("GameObjects");
 
+        int index = 0;
+
         foreach (GameObject gameObject in SceneManager.CurrentScene.GameObjects)
         {
-            if (ImGui.CollapsingHeader(gameObject.ToString()))
+            if (ImGui.CollapsingHeader(gameObject.ToString() + " (" + index + ")" ))
             {
                 ImGui.SeparatorText("Properties");
 
@@ -169,6 +171,8 @@ public class DebugGui : ImGuiDrawable
                     break;
                 }
             }
+
+            index++;
         }
 
         ImGui.End();
