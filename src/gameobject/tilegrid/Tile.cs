@@ -9,8 +9,6 @@ using System.Threading.Tasks;
 namespace SerpentEngine;
 public class Tile : GameObject
 {
-    public string Name { get; private set; }
-
     public Tile(string name)
     {
         Name = name;
