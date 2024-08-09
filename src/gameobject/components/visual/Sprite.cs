@@ -15,8 +15,7 @@ public class Sprite : Component
     public float Rotation { get; set; } = 0f;
     public Color Color { get; set; } = Color.White;
 
-
-    private Texture2D texture2d;
+    protected Texture2D texture2d;
 
     public Sprite(string path) : base(true)
     {

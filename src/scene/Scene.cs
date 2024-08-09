@@ -38,7 +38,7 @@ public abstract class Scene
         SerpentGame.Instance.GraphicsDevice.Clear(Color.Transparent);
 
         // Draw UI game objects
-        SerpentEngine.Draw.SpriteBatch.Begin(SpriteSortMode.FrontToBack, BlendState.AlphaBlend, SamplerState.PointWrap, null, null, null, Matrix.Identity);
+        SerpentEngine.Draw.SpriteBatch.Begin(SpriteSortMode.FrontToBack, BlendState.AlphaBlend, SamplerState.PointWrap, null, null, null, Matrix.Identity * Matrix.CreateScale(Camera.UIScale));
 
         foreach (GameObject uiElement in UIElements)
         {

@@ -5,6 +5,7 @@ namespace SerpentEngine;
 public class Camera
 {
     public float Zoom { get; set; } = 1.0f;
+    public float UIScale { get; set; } = 1.0f;
     public Vector2 Position { get; private set; } = Vector2.Zero;
     public Viewport Viewport { get; private set; }
     public Matrix Matrix { get; private set; } = Matrix.Identity;
