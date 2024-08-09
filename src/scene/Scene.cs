@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace SerpentEngine;
 public abstract class Scene
@@ -70,7 +71,7 @@ public abstract class Scene
 
     public virtual void Update()
     {
-        foreach (GameObject gameObject in GameObjects)
+        foreach (GameObject gameObject in GameObjects.ToList())
         {
             gameObject.Update();
         }
