@@ -31,9 +31,10 @@ namespace SerpentEngine
             {
                 if (target.GetComponent<Collision>() != null)
                 {
-                    if (Box.Intersects(target.GetComponent<Collision>().Box))
+                    if (Box.Intersects(target.GetComponent<Collision>().Box) && GameObject != target)
                     {
                         OnCollide?.Invoke(target);
+                        break;
                     }
                 }
             }
