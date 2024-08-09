@@ -91,6 +91,18 @@ public abstract class Scene
         return null;
     }
 
+    public GameObject GetGameObject(Vector2 position)
+    {
+        foreach (GameObject gameObject in GameObjects)
+        {
+            if(gameObject.Position == position)
+            {
+                return gameObject;
+            }
+        }
+        return null;
+    }
+
     public T CreateAndAddGameObject<T>() where T : GameObject, new()
     {
         T gameObject = new T();
