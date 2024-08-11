@@ -91,7 +91,7 @@ public abstract class Scene
         return null;
     }
 
-    public GameObject GetGameObject(Vector2 position)
+    public GameObject GetGameObjectAt(Vector2 position)
     {
         foreach (GameObject gameObject in GameObjects)
         {
