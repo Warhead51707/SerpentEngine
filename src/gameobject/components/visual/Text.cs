@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using static System.Formats.Asn1.AsnWriter;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace SerpentEngine
 {
@@ -15,7 +16,6 @@ namespace SerpentEngine
     {
         public string Body { get; private set; }
         public SpriteFont Font { get; private set; }
-
         public float Rotation { get; set; } = 0f;
 
         public Color Color = Color.Black;
@@ -23,6 +23,7 @@ namespace SerpentEngine
         public Text(string path, string text) : base(true)
         {
             Body = text;
+            Font = SerpentGame.Instance.Content.Load<SpriteFont>(path);
 
         }
 
