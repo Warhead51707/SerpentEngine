@@ -10,9 +10,10 @@ public abstract class Scene
 
     public Camera Camera { get; private set; } = new Camera();
 
-    // All GameObjects in the scene
-    public List<GameObject> GameObjects { get; private set; } = new List<GameObject>();
     public List<GameObject> UIElements { get; private set; } = new List<GameObject>();
+
+    // All GameObjects in the scene
+    private List<GameObject> GameObjects = new List<GameObject>();
 
     private RenderTarget2D uiRenderTarget = new RenderTarget2D(SerpentGame.Instance.GraphicsDevice, GraphicsConfig.SCREEN_WIDTH, GraphicsConfig.SCREEN_HEIGHT);
 
@@ -77,6 +78,27 @@ public abstract class Scene
         }
 
         Camera.Update();
+    }
+
+    public List<GameObject> GetGameObjects()
+    {
+        List<GameObject> foundGameObjects = new List<GameObject>();
+
+        foreach (GameObject gameObject in GameObjects)
+        {
+            foundGameObjects.Add(gameObject);
+
+            if (!gameObject.HasComponent<TileGrid>()) continue;
+
+            TileGrid tileGrid = gameObject.GetComponent<TileGrid>();
+
+            foreach (Tile tile in tileGrid.GetTiles())
+            {
+                foundGameObjects.Add(tile);
+            }
+        }
+
+        return foundGameObjects;
     }
 
     public T GetGameObject<T>() where T : GameObject

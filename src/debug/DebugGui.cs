@@ -93,13 +93,15 @@ public class DebugGui : ImGuiDrawable
     {
         ImGui.Begin("GameObjects", ref showGameObjectsWindow);
 
-        ImGui.Text("GameObjects: " + SceneManager.CurrentScene.GameObjects.Count);
+        List<GameObject> gameObjects = SceneManager.CurrentScene.GetGameObjects();
+
+        ImGui.Text("GameObjects: " + gameObjects.Count);
 
         ImGui.SeparatorText("GameObjects");
 
         int index = 0;
 
-        foreach (GameObject gameObject in SceneManager.CurrentScene.GameObjects)
+        foreach (GameObject gameObject in gameObjects)
         {
             if (ImGui.CollapsingHeader(gameObject.ToString() + " (" + index + ")" ))
             {

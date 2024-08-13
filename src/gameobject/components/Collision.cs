@@ -27,15 +27,18 @@ namespace SerpentEngine
 
         private void CheckCollision()
         {
-            foreach (GameObject target in SceneManager.CurrentScene.GameObjects)
+            foreach (GameObject target in SceneManager.CurrentScene.GetGameObjects())
             {
-                if (target.GetComponent<Collision>() != null)
+                if (!target.HasComponent<Collision>()) continue;
+
+                if (GameObject == target) continue;
+
+                Collision targetCollision = target.GetComponent<Collision>();
+
+                if (Box.Intersects(targetCollision.Box))
                 {
-                    if (Box.Intersects(target.GetComponent<Collision>().Box) && GameObject != target)
-                    {
-                        OnCollide?.Invoke(target);
-                        break;
-                    }
+                    OnCollide?.Invoke(target);
+                    break;
                 }
             }
         }

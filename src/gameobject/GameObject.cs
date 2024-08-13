@@ -64,6 +64,11 @@ public class GameObject
         return Components.GetComponent<T>();
     }
 
+    public bool HasComponent<T>() where T : Component
+    {
+        return Components.GetComponent<T>() != null;
+    }
+
     public virtual void OnRemove()
     {
     }
