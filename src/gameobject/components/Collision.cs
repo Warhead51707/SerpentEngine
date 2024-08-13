@@ -27,42 +27,25 @@ public class Collision : Component
         CheckCollision();
     }
 
+
+
     private void CheckCollision()
     {
-        foreach (GameObject target in SceneManager.CurrentScene.GameObjects)
+        foreach (GameObject target in SceneManager.CurrentScene.GetGameObjects())
         {
-            Box = new Rectangle((int)position.X, (int)position.Y, (int)dimensions.X, (int)dimensions.Y);
-        }
+            if (!target.HasComponent<Collision>()) continue;
 
-        public static Collision Empty()
-        {
-            return new Collision(Vector2.Zero, Vector2.Zero);
-        }
+            if (GameObject == target) continue;
 
-        public override void Update()
-        {
-            base.Update();
+            Collision targetCollision = target.GetComponent<Collision>();
 
-            CheckCollision();
-        }
-
-        private void CheckCollision()
-        {
-            foreach (GameObject target in SceneManager.CurrentScene.GetGameObjects())
+            if (Box.Intersects(targetCollision.Box))
             {
-                if (!target.HasComponent<Collision>()) continue;
-
-                if (GameObject == target) continue;
-
-                Collision targetCollision = target.GetComponent<Collision>();
-
-                if (Box.Intersects(targetCollision.Box))
-                {
-                    OnCollide?.Invoke(target);
-                    break;
-                }
+                OnCollide?.Invoke(target);
+                break;
             }
         }
     }
+
 }
     
