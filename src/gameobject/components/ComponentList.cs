@@ -65,4 +65,19 @@ public class ComponentList
 
         return null;
     }
+
+    public List<T> GetComponents<T>() where T : Component
+    {
+        List<T> components = new List<T>();
+
+        foreach (Component component in Components)
+        {
+            if (component is T)
+            {
+                components.Add((T)component);
+            }
+        }
+
+        return components;
+    }
 }

@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using System.Collections.Generic;
 
 namespace SerpentEngine;
 public class GameObject
@@ -62,6 +63,11 @@ public class GameObject
     public T GetComponent<T>() where T : Component
     {
         return Components.GetComponent<T>();
+    }
+
+    public List<T> GetComponents<T>() where T : Component
+    {
+        return Components.GetComponents<T>();
     }
 
     public bool HasComponent<T>() where T : Component

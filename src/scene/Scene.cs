@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 
 namespace SerpentEngine;
@@ -90,11 +91,14 @@ public abstract class Scene
 
             if (!gameObject.HasComponent<TileGrid>()) continue;
 
-            TileGrid tileGrid = gameObject.GetComponent<TileGrid>();
+            List<TileGrid> tileGrids = gameObject.GetComponents<TileGrid>();
 
-            foreach (Tile tile in tileGrid.GetTiles())
+            foreach (TileGrid tileGrid in tileGrids)
             {
-                foundGameObjects.Add(tile);
+                foreach (Tile tile in tileGrid.GetTiles())
+                {
+                    foundGameObjects.Add(tile);
+                }
             }
         }
 
@@ -115,14 +119,46 @@ public abstract class Scene
 
     public GameObject GetGameObjectAt(Vector2 position)
     {
-        foreach (GameObject gameObject in GameObjects)
+        foreach (GameObject gameObject in GetGameObjects())
         {
-            if(gameObject.Position == position)
+            if (gameObject.Position == position)
             {
                 return gameObject;
             }
         }
+
         return null;
+    }
+
+    public T GetGameObjectAt<T>(Vector2 position) where T : GameObject
+    {
+        foreach (GameObject gameObject in GetGameObjects())
+        {
+            if (gameObject is T && gameObject.Position == position)
+            {
+                return (T)gameObject;
+            }
+        }
+
+        return null;
+    }
+
+    public List<GameObject> GetGameObjectsAt(Vector2 position)
+    {
+        List<GameObject> gameObjects = new List<GameObject>();
+
+        foreach (GameObject gameObject in GetGameObjects())
+        {
+            if(gameObject.Position == position)
+            {
+                gameObjects.Add(gameObject);
+                Debug.WriteLine(gameObject.Name);
+            }
+        }
+
+        if (gameObjects.Count == 0) return null;
+
+        return gameObjects;
     }
 
     public T CreateAndAddGameObject<T>() where T : GameObject, new()
