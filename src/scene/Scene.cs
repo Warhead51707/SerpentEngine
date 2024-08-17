@@ -152,7 +152,6 @@ public abstract class Scene
             if(gameObject.Position == position)
             {
                 gameObjects.Add(gameObject);
-                Debug.WriteLine(gameObject.Name);
             }
         }
 
