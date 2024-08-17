@@ -114,7 +114,6 @@ public abstract class Scene
                 return (T)gameObject;
             }
         }
-
         return null;
     }
 
