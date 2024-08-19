@@ -27,8 +27,6 @@ public class Collision : Component
         CheckCollision();
     }
 
-
-
     private void CheckCollision()
     {
         foreach (GameObject target in SceneManager.CurrentScene.GetGameObjects())

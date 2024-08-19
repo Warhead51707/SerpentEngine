@@ -42,9 +42,8 @@ namespace SerpentEngine
         protected override void LoadContent()
         {
            Input.Initialize();
-
            SerpentEngine.Draw.Initialize(GraphicsDevice);
-
+           
            ImGuiManager.Initialize();
         }
 
