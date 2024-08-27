@@ -73,6 +73,10 @@ public abstract class Scene
 
     public virtual void Update()
     {
+        foreach (GameObject ui in UIElements.ToList())
+        {
+            ui.Update();
+        }
         foreach (GameObject gameObject in GameObjects.ToList())
         {
             gameObject.Update();
