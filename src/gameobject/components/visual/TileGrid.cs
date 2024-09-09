@@ -186,6 +186,34 @@ public class TileGrid : Component
         }
     }
 
+    public Tile South(Tile tile)
+    {
+        if (!Tiles.ContainsKey(ConvertWorldCoordinatesToGridCoordinates(tile.Position) + new Vector2(0, 1))) return Tile.Empty();
+
+        return Tiles[ConvertWorldCoordinatesToGridCoordinates(tile.Position) + new Vector2(0, 1)];
+    }
+
+    public Tile North(Tile tile)
+    {
+        if (!Tiles.ContainsKey(ConvertWorldCoordinatesToGridCoordinates(tile.Position) + new Vector2(0, -1))) return Tile.Empty();
+
+        return Tiles[ConvertWorldCoordinatesToGridCoordinates(tile.Position) + new Vector2(0, -1)];
+    }
+
+    public Tile East(Tile tile)
+    {
+        if (!Tiles.ContainsKey(ConvertWorldCoordinatesToGridCoordinates(tile.Position) + new Vector2(1, 0))) return Tile.Empty();
+
+        return Tiles[ConvertWorldCoordinatesToGridCoordinates(tile.Position) + new Vector2(1, 0)];
+    }
+
+    public Tile West(Tile tile)
+    {
+        if (!Tiles.ContainsKey(ConvertWorldCoordinatesToGridCoordinates(tile.Position) + new Vector2(-1, 0))) return Tile.Empty();
+
+        return Tiles[ConvertWorldCoordinatesToGridCoordinates(tile.Position) + new Vector2(-1, 0)];
+    }
+
     public override void Draw()
     {
         Camera camera = SceneManager.CurrentScene.Camera;
