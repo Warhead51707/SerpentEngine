@@ -214,6 +214,34 @@ public class TileGrid : Component
         return Tiles[ConvertWorldCoordinatesToGridCoordinates(tile.Position) + new Vector2(-1, 0)];
     }
 
+    public Tile South(Tile tile, int tiles)
+    {
+        if (!Tiles.ContainsKey(ConvertWorldCoordinatesToGridCoordinates(tile.Position) + new Vector2(0, tiles))) return Tile.Empty();
+
+        return Tiles[ConvertWorldCoordinatesToGridCoordinates(tile.Position) + new Vector2(0, tiles)];
+    }
+
+    public Tile North(Tile tile, int tiles)
+    {
+        if (!Tiles.ContainsKey(ConvertWorldCoordinatesToGridCoordinates(tile.Position) + new Vector2(0, -tiles))) return Tile.Empty();
+
+        return Tiles[ConvertWorldCoordinatesToGridCoordinates(tile.Position) + new Vector2(0, -tiles)];
+    }
+
+    public Tile East(Tile tile, int tiles)
+    {
+        if (!Tiles.ContainsKey(ConvertWorldCoordinatesToGridCoordinates(tile.Position) + new Vector2(tiles, 0))) return Tile.Empty();
+
+        return Tiles[ConvertWorldCoordinatesToGridCoordinates(tile.Position) + new Vector2(tiles, 0)];
+    }
+
+    public Tile West(Tile tile, int tiles)
+    {
+        if (!Tiles.ContainsKey(ConvertWorldCoordinatesToGridCoordinates(tile.Position) + new Vector2(-tiles, 0))) return Tile.Empty();
+
+        return Tiles[ConvertWorldCoordinatesToGridCoordinates(tile.Position) + new Vector2(-tiles, 0)];
+    }
+
     public override void Draw()
     {
         Camera camera = SceneManager.CurrentScene.Camera;
