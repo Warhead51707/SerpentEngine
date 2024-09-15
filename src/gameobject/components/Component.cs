@@ -20,6 +20,11 @@ public abstract class Component
         SubComponents.SetGameObject(gameObject);
     }
 
+    public virtual void Initialize()
+    {
+        SubComponents.Initialize();
+    }
+
     public virtual void Update() {
 
     }

@@ -11,6 +11,14 @@ public class ComponentList
         GameObject = gameObject;
     }
 
+    public void Initialize()
+    {
+        foreach (Component component in Components)
+        {
+            component.Initialize();
+        }
+    }
+
     public void Update()
     {
         foreach (Component component in Components)

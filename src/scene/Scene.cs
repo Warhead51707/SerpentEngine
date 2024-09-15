@@ -175,13 +175,13 @@ public abstract class Scene
     public void AddGameObject(GameObject gameObject)
     {
         GameObjects.Add(gameObject);
-        gameObject.Load();
+        gameObject.Initialize();
     }
 
     public void AddUIElement(GameObject uiElement)
     {
         UIElements.Add(uiElement);
-        uiElement.Load();
+        uiElement.Initialize();
     }
 
     public void Remove(GameObject gameObject)

@@ -16,6 +16,13 @@ public class GameObject
         Components = new ComponentList(this);
     }
 
+    public void Initialize()
+    {
+        Load();
+
+        Components.Initialize();
+    }
+
     public virtual void Load()
     {
     }

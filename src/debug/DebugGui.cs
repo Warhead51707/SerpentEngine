@@ -5,7 +5,9 @@ namespace SerpentEngine;
 public class DebugGui : ImGuiDrawable
 {
     private static List<string> logs = new List<string>();
+
     private bool showGeneralWindow = false;
+    private bool showDebugToolsWindow = false;
     private bool showConsoleWindow = false;
     private bool showGameObjectsWindow = false;
 
@@ -28,6 +30,11 @@ public class DebugGui : ImGuiDrawable
            GeneralWindow();
        }
 
+       if (showDebugToolsWindow)
+       {
+           DebugToolsWindow();
+       }
+
        if (showGameObjectsWindow)
        {
            GameObjectsWindow();
@@ -43,6 +50,11 @@ public class DebugGui : ImGuiDrawable
                if (ImGui.MenuItem("General"))
                 {
                     showGeneralWindow = true;
+                }
+
+               if (ImGui.MenuItem("Debug Tools"))
+                {
+                    showDebugToolsWindow = true;
                 }
 
                if (ImGui.MenuItem("Console"))
@@ -85,6 +97,28 @@ public class DebugGui : ImGuiDrawable
 
         ImGui.Text("FPS: " + SerpentGame.FPS);
         ImGui.Text("Current Scene: " + SceneManager.CurrentScene.Name);
+
+        ImGui.End();
+    }
+
+    public void DebugToolsWindow()
+    {
+        ImGui.Begin("Debug Tools", ref showDebugToolsWindow);
+
+        ImGui.Text("Clear Console: ");
+
+        ImGui.SameLine();
+
+        if (ImGui.Button("Clear"))
+        {
+            logs.Clear();
+        }
+
+        ImGui.Text("Show Button Hitboxes: ");
+
+        ImGui.SameLine();
+
+        ImGui.Checkbox("Show", ref DebugStates.ShowButtonHitboxes);
 
         ImGui.End();
     }
