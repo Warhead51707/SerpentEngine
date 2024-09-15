@@ -42,7 +42,7 @@ public class Button : Component
         SerpentEngine.Draw.SpriteBatch.Draw(SerpentEngine.Draw.Pixel, Hitbox, color);
     }
 
-    public void CheckClick()
+    public virtual void CheckClick()
     {
         Vector2 screenPosition = Input.Mouse.GetNewPosition() / SceneManager.CurrentScene.Camera.UIScale;
         if (!Input.Mouse.LeftClick()) return;
