@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Formats.Asn1.AsnWriter;
 
 namespace SerpentEngine;
 
@@ -39,7 +40,9 @@ public class Button : Component
 
         color.A = 100;
 
-        SerpentEngine.Draw.SpriteBatch.Draw(SerpentEngine.Draw.Pixel, Hitbox, color);
+        Texture2D texture2d = SerpentEngine.Draw.Pixel;
+
+        SerpentEngine.Draw.SpriteBatch.Draw(texture2d, Hitbox, null, color, 0, Vector2.Zero, SpriteEffects.None, 100 * 0.001f);
     }
 
     public virtual void CheckClick()
