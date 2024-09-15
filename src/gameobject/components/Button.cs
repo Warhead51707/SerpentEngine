@@ -28,6 +28,8 @@ public class Button : Component
 
     public override void Update()
     {
+        Hitbox = new Rectangle((int)GameObject.Position.X - (int)(Size.X / 2), (int)GameObject.Position.Y - (int)(Size.Y / 2), (int)Size.X, (int)Size.Y);
+
         CheckClick();
         base.Update();
     }
