@@ -165,15 +165,15 @@ public class TileGrid : Component
         float cameraWidth = camera.Viewport.Width / camera.Zoom;
         float cameraHeight = camera.Viewport.Height / camera.Zoom;
 
-        int horizontalTileCount = (int)(cameraWidth / TileSize.X) + 4;
-        int verticalTileCount = (int)(cameraHeight / TileSize.Y) + 4;
+        int horizontalTileCount = (int)(cameraWidth / TileSize.X) + 8;
+        int verticalTileCount = (int)(cameraHeight / TileSize.Y) + 8;
 
         int horizontalStart = (int)Math.Ceiling(-cameraGridPosition.X / camera.Zoom) - 2;
         int verticalStart = (int)Math.Ceiling(-cameraGridPosition.Y / camera.Zoom) - 2;
 
-        for (int y = 0; y < verticalTileCount; y++)
+        for (int y = -4; y < verticalTileCount; y++)
         {
-            for (int x = 0; x < horizontalTileCount; x++)
+            for (int x = -4; x < horizontalTileCount; x++)
             {
                 Vector2 gridCoordinates = new Vector2(horizontalStart + x, verticalStart + y);
 
@@ -252,15 +252,15 @@ public class TileGrid : Component
         float cameraWidth = camera.Viewport.Width / camera.Zoom;
         float cameraHeight = camera.Viewport.Height / camera.Zoom;
 
-        int horizontalTileCount = (int)(cameraWidth / TileSize.X) + 4;
-        int verticalTileCount = (int)(cameraHeight / TileSize.Y) + 4;
+        int horizontalTileCount = (int)(cameraWidth / TileSize.X) + 8;
+        int verticalTileCount = (int)(cameraHeight / TileSize.Y) + 8;
 
         int horizontalStart = (int)Math.Ceiling(-cameraGridPosition.X / camera.Zoom) - 2;
         int verticalStart = (int)Math.Ceiling(-cameraGridPosition.Y / camera.Zoom) - 2;
 
-        for (int y = 0; y < verticalTileCount; y++)
+        for (int y = -4; y < verticalTileCount; y++)
         {
-            for (int x = 0; x < horizontalTileCount; x++)
+            for (int x = -4; x < horizontalTileCount; x++)
             {
                 Vector2 gridCoordinates = new Vector2(horizontalStart + x, verticalStart + y);
 
