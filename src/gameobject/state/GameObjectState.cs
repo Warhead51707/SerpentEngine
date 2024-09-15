@@ -23,6 +23,7 @@ public class GameObjectState
 
     public virtual void Initialize()
     {
+
         StateMachine = GameObject.GetComponent<StateMachine>();
     }
 

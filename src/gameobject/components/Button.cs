@@ -25,14 +25,13 @@ public class Button : Component
         base.Update();
     }
 
-    public void CheckClick()
+    public virtual void CheckClick()
     {
         Rectangle box = new Rectangle((int)GameObject.Position.X - (int)(Size.X / 2), (int)GameObject.Position.Y - (int)(Size.Y / 2), (int)Size.X, (int)Size.Y);
 
         Vector2 screenPosition = Input.Mouse.GetNewPosition() / SceneManager.CurrentScene.Camera.UIScale;
-
         if (!Input.Mouse.LeftClick()) return;
-        
+
         if (box.Contains(screenPosition))
         {
             OnClick.Invoke();
