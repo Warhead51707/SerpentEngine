@@ -19,7 +19,7 @@ namespace SerpentEngine
         public float Rotation { get; set; } = 0f;
 
         public Color Color = Color.Black;
-        public float Scale { get; set; } = 0f;
+        public float Scale { get; set; } = 1f;
         public Text(string path, string text) : base(true)
         {
             Body = text;

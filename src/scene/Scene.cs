@@ -184,6 +184,22 @@ public abstract class Scene
         uiElement.Initialize();
     }
 
+    public void AddUIElement(UiElementGroup group)
+    {
+
+        UIElements.Add(group.Parent);
+        group.Parent.Initialize();
+
+        foreach(KeyValuePair<GameObject, Vector2> uiEntry in group.Children)
+        {
+            GameObject ui = uiEntry.Key;
+            Vector2 offset = uiEntry.Value;
+
+            UIElements.Add(ui);
+            ui.Initialize();
+        }
+    }
+
     public void Remove(GameObject gameObject)
     {
         if (UIElements.Contains(gameObject))
