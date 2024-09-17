@@ -13,7 +13,7 @@ namespace SerpentEngine
 
         public float GridSize { get; set; } = 1;
 
-        public Dictionary<Vector2, GameObject> UiElements = new Dictionary<Vector2, GameObject>();
+        public List<GameObject> UiElements = new List<GameObject>();
 
         public Vector2 Size { get; set; } = Vector2.Zero;
 
@@ -25,22 +25,24 @@ namespace SerpentEngine
 
         public void AddUiElement(GameObject ui)
         {
-            ui.Position = Position += ConvertNumberToGridCoordinates(UiElements.Count) * GridSize;
-            UiElements.Add(ConvertNumberToGridCoordinates(UiElements.Count), ui);
+            ui.Position = Position + ConvertNumberToGridCoordinates(UiElements.Count) * GridSize;
+            UiElements.Add(ui);
         }
 
         public void AddUiElementGroup(UiElementGroup uiGroup)
         {
-            uiGroup.Parent.Position = Position += ConvertNumberToGridCoordinates(UiElements.Count) * GridSize;
-            DebugGui.Log(uiGroup.Parent.Position + "");
-            UiElements.Add(ConvertNumberToGridCoordinates(UiElements.Count), uiGroup.Parent);
+            uiGroup.Parent.Position = Position + ConvertNumberToGridCoordinates(UiElements.Count) * GridSize;
+            DebugGui.Log(uiGroup.Parent.Position + " " + ConvertNumberToGridCoordinates(UiElements.Count)  + " " + GridSize);
+            UiElements.Add(uiGroup.Parent);
 
-            foreach(KeyValuePair<GameObject, Vector2> uiEntry in uiGroup.Children)
+
+            foreach (KeyValuePair<GameObject, Vector2> uiEntry in uiGroup.Children)
             {
                 GameObject ui = uiEntry.Key;
-                ui.Position = Position += ConvertNumberToGridCoordinates(UiElements.Count) * GridSize;
-                UiElements.Add(ConvertNumberToGridCoordinates(UiElements.Count), ui);
+                ui.Position = Position + uiEntry.Value + ConvertNumberToGridCoordinates(UiElements.Count) * GridSize;
+                UiElements.Add(ui);
             }
+
         }
 
         public Vector2 ConvertNumberToGridCoordinates(int number)
