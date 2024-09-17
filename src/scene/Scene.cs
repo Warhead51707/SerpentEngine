@@ -184,6 +184,18 @@ public abstract class Scene
         uiElement.Initialize();
     }
 
+    public void AddUIElementGrid(UiElementGrid uiElementGrid)
+    {
+        foreach (KeyValuePair<Vector2, GameObject> uiEntry in uiElementGrid.UiElements)
+        {
+            GameObject ui = uiEntry.Value;
+            Vector2 offset = uiEntry.Key;
+
+            UIElements.Add(ui);
+            ui.Initialize();
+        }
+    }
+
     public void AddUIElement(UiElementGroup group)
     {
 
