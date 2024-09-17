@@ -124,6 +124,13 @@ public class SerpentMouse
         return newMousePos;
     }
 
+    public Vector2 GetWorldPosition()
+    {
+        Vector2 screenPosition = newMousePos;
+        Vector2 screenCenter = new Vector2(GraphicsConfig.SCREEN_WIDTH / 2, GraphicsConfig.SCREEN_HEIGHT / 2);
+        return ((screenPosition - screenCenter) / SceneManager.CurrentScene.Camera.Zoom) + SceneManager.CurrentScene.Camera.Position;
+    }
+
     public bool LeftClickRelease()
     {
         if (newMouse.LeftButton == ButtonState.Released && oldMouse.LeftButton == ButtonState.Pressed)
