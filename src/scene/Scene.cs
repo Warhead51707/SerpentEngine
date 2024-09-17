@@ -184,14 +184,16 @@ public abstract class Scene
         uiElement.Initialize();
     }
 
-    public void AddUIElementGrid(UiElementGrid uiElementGrid)
+    public T GetUIElement<T>() where T : GameObject
     {
-        foreach (GameObject ui in uiElementGrid.UiElements)
+        foreach (GameObject uiElement in UIElements)
         {
-
-            UIElements.Add(ui);
-            ui.Initialize();
+            if (uiElement is T)
+            {
+                return (T)uiElement;
+            }
         }
+        return null;
     }
 
     public void AddUIElement(UiElementGroup group)

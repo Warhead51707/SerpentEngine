@@ -24,9 +24,4 @@ public class UiElementGroup
         child.Position = Parent.Position + offset;
         Children.Add(child, offset);
     }
-
-
-
-
-
 }

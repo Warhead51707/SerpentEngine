@@ -58,8 +58,6 @@ public class TileGrid : Component
         else
         {
             Tiles.Add(coordinates, placedTile);
-
-
         }
 
     }
@@ -154,7 +152,6 @@ public class TileGrid : Component
 
     public override void Update()
     {
-
         VisibleTiles = 0;
 
         Camera camera = SceneManager.CurrentScene.Camera;

@@ -14,9 +14,7 @@ public class Sprite : Component
     public Vector2 Coordinates { get; set; } = Vector2.Zero;
     public float Rotation { get; set; } = 0f;
     public Color Color { get; set; } = Color.White;
-
     public float LayerOffset { get; set; } = 0;
-
 
     public SpriteEffects Effect { get; set; } = SpriteEffects.None;
 

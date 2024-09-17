@@ -5,10 +5,10 @@ namespace SerpentEngine;
 public class GameObject
 {
     public ComponentList Components { get; private set; }
-
     public string Name { get; set; } = "";
-
     public Vector2 Position { get; set; } = Vector2.Zero;
+    public bool Enabled { get; set; } = true;
+    public bool Visible { get; set; } = true;
     public float Layer { get; set; } = 0;
 
     public GameObject()
@@ -29,11 +29,17 @@ public class GameObject
 
     public virtual void Update()
     {
+        if (!Enabled) return;
+
         Components.Update();
     }
 
     public void Draw()
     {
+        if (!Enabled) return;
+
+        if (!Visible) return;
+
         Components.Draw();
     }
 
