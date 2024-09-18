@@ -7,6 +7,7 @@ public class GameObject
     public ComponentList Components { get; private set; }
     public string Name { get; set; } = "";
     public Vector2 Position { get; set; } = Vector2.Zero;
+    public Vector2 Size { get; set; } = Vector2.Zero;
     public bool Enabled { get; set; } = true;
     public bool Visible { get; set; } = true;
     public float Layer { get; set; } = 0;

@@ -62,8 +62,8 @@ public class NineSliceSprite : Sprite
 
     private Rectangle[] CreateTargetPatches()
     {
-        int x = (int)GameObject.Position.X;
-        int y = (int)GameObject.Position.Y;
+        int x = (int)(GameObject.Position.X - Size.X / 2);
+        int y = (int)(GameObject.Position.Y - Size.Y / 2);
         int width = (int)Size.X;
         int height = (int)Size.Y;
 

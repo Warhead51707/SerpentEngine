@@ -196,6 +196,23 @@ public abstract class Scene
         return null;
     }
 
+    public GameObject GetUIElementAt(Vector2 position)
+    {
+        foreach (GameObject uiElement in UIElements)
+        {
+            Rectangle bounds = new Rectangle((int)uiElement.Position.X - (int)(uiElement.Size.X / 2), (int)uiElement.Position.Y - (int)(uiElement.Size.Y / 2), (int)uiElement.Size.X, (int)uiElement.Size.Y);
+
+            if (!uiElement.Enabled) continue;
+
+            if (bounds.Contains(position))
+            {
+                return uiElement;
+            }
+        }
+
+        return null;
+    }
+
     public void AddUIElement(UiElementGroup group)
     {
 
