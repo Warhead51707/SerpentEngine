@@ -24,6 +24,15 @@ public class StateMachine : Component
         state.Initialize();
     }
 
+    public GameObjectState CreateAndAddState(string name)
+    {
+        GameObjectState state = new GameObjectState(name);
+
+        AddState(state);
+
+        return state;
+    }
+
     public void SetState(string name)
     {
         if (CurrentState != null)
