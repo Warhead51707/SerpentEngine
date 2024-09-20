@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace SerpentEngine;
 public class GameObject
@@ -76,7 +77,20 @@ public class GameObject
 
     public T GetComponent<T>() where T : Component
     {
-        return Components.GetComponent<T>();
+        Component foundComponent = Components.GetComponent<T>();
+
+        if(typeof(T) == typeof(Sprite) && foundComponent == null)
+        {
+            AnimationTree animationTree = Components.GetComponent<AnimationTree>();
+            if(animationTree != null)
+            {
+
+                Debug.WriteLine(animationTree.CurrentAnimation+"");
+                foundComponent = animationTree.CurrentAnimation.SpriteSheet.CurrentSprite;
+            }
+        }
+
+        return foundComponent as T;
     }
 
     public List<T> GetComponents<T>() where T : Component

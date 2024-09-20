@@ -16,6 +16,7 @@ public class AnimationTree : Component
     {
         Animation animation = new Animation(path);
         animation.SpriteSheet.Add(GameObject);
+        CurrentAnimation = animation;
 
         Animations.Add(condition, animation);
     }
