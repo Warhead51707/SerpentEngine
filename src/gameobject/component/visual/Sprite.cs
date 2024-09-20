@@ -65,6 +65,7 @@ public class Sprite : Component
     public void Draw(Vector2 tileSize, Vector2 size)
     {
         if (!Enabled) return;
+
         SerpentEngine.Draw.SpriteBatch.Draw(texture2d, GameObject.Position, new Rectangle((int)Coordinates.X * (int)tileSize.X, (int)Coordinates.Y * (int)tileSize.Y, texture2d.Width / (int)size.X, texture2d.Height / (int)size.Y), Color, Rotation, new Vector2((texture2d.Width / (int)size.X) / 2, (texture2d.Height / (int)size.Y) / 2), Scale, Effect, (GameObject.Layer + LayerOffset) * 0.001f);
     }
 }
