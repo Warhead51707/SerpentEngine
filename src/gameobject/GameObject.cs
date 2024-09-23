@@ -79,16 +79,6 @@ public class GameObject
     {
         Component foundComponent = Components.GetComponent<T>();
 
-        if(typeof(T) == typeof(Sprite) && foundComponent == null)
-        {
-            AnimationTree animationTree = Components.GetComponent<AnimationTree>();
-            if(animationTree != null)
-            {
-
-                Debug.WriteLine(animationTree.CurrentAnimation+"");
-                foundComponent = animationTree.CurrentAnimation.SpriteSheet.CurrentSprite;
-            }
-        }
 
         return foundComponent as T;
     }
