@@ -6,7 +6,7 @@ public delegate void CollisionEvent(GameObject target);
 public class Collision : Component
 {
     public event CollisionEvent OnCollide;
-    public Rectangle Box { get; private set; } = Rectangle.Empty;
+    public Rectangle Box { get; set; } = Rectangle.Empty;
 
     public Collision(Vector2 position, Vector2 dimensions) : base(false)
     {
@@ -15,7 +15,8 @@ public class Collision : Component
 
     public static Collision Empty()
     {
-        return new Collision(Vector2.Zero, Vector2.Zero);
+        
+        return new Collision(Vector2.Zero,Vector2.Zero);
     }
 
     public override void Update()

@@ -20,6 +20,9 @@ namespace SerpentEngine
 
         public Color Color = Color.Black;
         public float Scale { get; set; } = 1f;
+
+        public float LayerOffset { get; set; } = 0;
+
         public Text(string path, string text) : base(true)
         {
             Body = text;
@@ -43,7 +46,7 @@ namespace SerpentEngine
         {
             if (!Enabled) return;
 
-            SerpentEngine.Draw.SpriteBatch.DrawString(Font, Body, GameObject.Position, Color, Rotation, Vector2.Zero, Scale, SpriteEffects.None, GameObject.Layer * 0.001f);
+            SerpentEngine.Draw.SpriteBatch.DrawString(Font, Body, GameObject.Position, Color, Rotation, Vector2.Zero, Scale, SpriteEffects.None, (GameObject.Layer + LayerOffset) * 0.001f);
         }
     }
 }

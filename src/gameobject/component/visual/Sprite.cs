@@ -58,7 +58,7 @@ public class Sprite : Component
     public override void Draw()
     {
         if (!Enabled) return;
-
+        
         SerpentEngine.Draw.SpriteBatch.Draw(texture2d, GameObject.Position, new Rectangle((int)Coordinates.X, (int)Coordinates.Y, texture2d.Width, texture2d.Height), Color, Rotation, new Vector2(texture2d.Width / 2, texture2d.Height / 2), Scale, Effect, (GameObject.Layer + LayerOffset) * 0.001f);
     }
 

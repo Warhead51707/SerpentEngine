@@ -57,7 +57,7 @@ public abstract class Scene
         // Draw scene game objects
         SerpentEngine.Draw.SpriteBatch.Begin(SpriteSortMode.FrontToBack, BlendState.AlphaBlend, SamplerState.PointWrap, null, null, null, Camera.Matrix);
 
-        foreach (GameObject gameObject in GameObjects)
+        foreach (GameObject gameObject in GameObjects.ToList())
         {
             gameObject.Draw();
         }
