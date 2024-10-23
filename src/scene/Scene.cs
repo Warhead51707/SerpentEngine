@@ -109,6 +109,36 @@ public abstract class Scene
         return foundGameObjects;
     }
 
+    public List<GameObject> GetGameObjects<T>() where T : GameObject
+    {
+        List<GameObject> foundGameObjects = new List<GameObject>();
+
+        foreach (GameObject gameObject in GameObjects)
+        {
+            if (gameObject is T)
+            {
+                foundGameObjects.Add(gameObject);
+            }
+
+            if (!gameObject.HasComponent<TileGrid>()) continue;
+
+            List<TileGrid> tileGrids = gameObject.GetComponents<TileGrid>();
+
+            foreach (TileGrid tileGrid in tileGrids)
+            {
+                foreach (Tile tile in tileGrid.GetTiles())
+                {
+                    if (tile is T)
+                    {
+                        foundGameObjects.Add(tile);
+                    }
+                }
+            }
+        }
+
+        return foundGameObjects;
+    }
+
     public T GetGameObject<T>() where T : GameObject
     {
         foreach (GameObject gameObject in GameObjects)
