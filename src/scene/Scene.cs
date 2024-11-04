@@ -20,6 +20,8 @@ public abstract class Scene
 
     public bool Paused { get; private set; } = false;
 
+    private GameObject[] gameObjectsSnapshot = new GameObject[0];
+
     public Scene(string name)
     {
         Name = name;
@@ -57,7 +59,7 @@ public abstract class Scene
         // Draw scene game objects
         SerpentEngine.Draw.SpriteBatch.Begin(SpriteSortMode.FrontToBack, BlendState.AlphaBlend, SamplerState.PointWrap, null, null, null, Camera.Matrix);
 
-        foreach (GameObject gameObject in GameObjects.ToList())
+        foreach (GameObject gameObject in gameObjectsSnapshot)
         {
             gameObject.Draw();
         }
@@ -73,11 +75,17 @@ public abstract class Scene
 
     public virtual void Update()
     {
+        lock (GameObjects)
+        {
+            gameObjectsSnapshot = GameObjects.ToArray();
+        }
+
         foreach (GameObject ui in UIElements.ToList())
         {
             ui.Update();
         }
-        foreach (GameObject gameObject in GameObjects.ToList())
+
+        foreach (GameObject gameObject in gameObjectsSnapshot)
         {
             gameObject.Update();
         }
@@ -89,22 +97,24 @@ public abstract class Scene
     {
         List<GameObject> foundGameObjects = new List<GameObject>();
 
-        foreach (GameObject gameObject in GameObjects.ToList())
-        {
-            foundGameObjects.Add(gameObject);
-
-            if (!gameObject.HasComponent<TileGrid>()) continue;
-
-            List<TileGrid> tileGrids = gameObject.GetComponents<TileGrid>();
-
-            foreach (TileGrid tileGrid in tileGrids)
+            foreach (GameObject gameObject in gameObjectsSnapshot)
             {
-                foreach (Tile tile in tileGrid.GetTiles())
+                foundGameObjects.Add(gameObject);
+
+                if (!gameObject.HasComponent<TileGrid>()) continue;
+
+                List<TileGrid> tileGrids = gameObject.GetComponents<TileGrid>();
+
+                foreach (TileGrid tileGrid in tileGrids)
                 {
-                    foundGameObjects.Add(tile);
+                    foreach (Tile tile in tileGrid.GetTiles())
+                    {
+                        foundGameObjects.Add(tile);
+                    }
                 }
             }
-        }
+        
+
 
         return foundGameObjects;
     }

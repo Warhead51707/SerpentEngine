@@ -12,15 +12,15 @@ public class Timer : Component
 {
     public event TimeoutEvent OnTimeout;
 
-    public int WaitTime { get; set; } = 0;
+    public float WaitTime { get; set; } = 0;
 
-    public int Time { get; set; } = 0;
+    public float Time { get; set; } = 0;
 
     public bool Autostart { get; set; } = false;
 
 
     private System.Timers.Timer timer = new System.Timers.Timer();
-    public Timer(int waitTime) : base(false)
+    public Timer(float waitTime) : base(false)
     {
         WaitTime = waitTime;
         timer.Enabled = false;

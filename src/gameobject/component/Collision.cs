@@ -30,6 +30,7 @@ public class Collision : Component
 
     private void CheckCollision()
     {
+        
         foreach (GameObject target in SceneManager.CurrentScene.GetGameObjects())
         {
             if (!target.HasComponent<Collision>()) continue;

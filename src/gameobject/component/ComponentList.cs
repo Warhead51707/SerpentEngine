@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace SerpentEngine;
 public class ComponentList
@@ -21,7 +22,7 @@ public class ComponentList
 
     public void Update()
     {
-        foreach (Component component in Components)
+        foreach (Component component in Components.ToList())
         {
             component.Update();
         }
