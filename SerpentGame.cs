@@ -73,7 +73,7 @@ namespace SerpentEngine
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.Black);
+            GraphicsDevice.Clear(GraphicsConfig.BACKGROUND_COLOR);
 
             SceneManager.Draw();
 

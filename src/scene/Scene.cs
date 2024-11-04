@@ -52,7 +52,7 @@ public abstract class Scene
 
         SerpentGame.Instance.GraphicsDevice.SetRenderTarget(null);
 
-        SerpentGame.Instance.GraphicsDevice.Clear(Color.Black);
+        SerpentGame.Instance.GraphicsDevice.Clear(GraphicsConfig.BACKGROUND_COLOR);
 
         // Draw scene game objects
         SerpentEngine.Draw.SpriteBatch.Begin(SpriteSortMode.FrontToBack, BlendState.AlphaBlend, SamplerState.PointWrap, null, null, null, Camera.Matrix);
@@ -89,7 +89,7 @@ public abstract class Scene
     {
         List<GameObject> foundGameObjects = new List<GameObject>();
 
-        foreach (GameObject gameObject in GameObjects)
+        foreach (GameObject gameObject in GameObjects.ToList())
         {
             foundGameObjects.Add(gameObject);
 

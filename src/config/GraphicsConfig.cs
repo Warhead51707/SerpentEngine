@@ -1,4 +1,6 @@
-﻿namespace SerpentEngine;
+﻿using Microsoft.Xna.Framework;
+
+namespace SerpentEngine;
 public class GraphicsConfig
 {
     public static int SCREEN_WIDTH = 0;
@@ -9,6 +11,8 @@ public class GraphicsConfig
     public static int FRAMERATE = 60;
 
     public static bool FULLSCREEN = true;
+
+    public static Color BACKGROUND_COLOR = Color.Black;
 
     public static void Apply()
     {
