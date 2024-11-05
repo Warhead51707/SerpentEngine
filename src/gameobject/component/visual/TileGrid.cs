@@ -45,7 +45,7 @@ public class TileGrid : Component
         }
 
         Tile placedTile = matchedTileSet.GetNewInstance(tileName);
-        placedTile.Load();
+        placedTile.Initialize();
 
         placedTile.Layer = Layer;
 

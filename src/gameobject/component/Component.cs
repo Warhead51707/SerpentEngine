@@ -22,7 +22,16 @@ public abstract class Component
 
     public virtual void Initialize()
     {
+        Debug.WriteLine(this);
         SubComponents.Initialize();
+    }
+
+    public T GetSibling<T>() where T : Component
+    {
+        Component foundComponent = GameObject.Components.GetComponent<T>();
+
+
+        return foundComponent as T;
     }
 
     public virtual void Update() {
