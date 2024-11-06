@@ -64,7 +64,7 @@ public class ComponentList
 
     public T GetComponent<T>() where T : Component
     {
-        foreach (Component component in Components)
+        foreach (Component component in Components.ToList())
         {
             if (component is T)
             {

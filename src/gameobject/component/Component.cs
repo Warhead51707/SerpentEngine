@@ -22,7 +22,6 @@ public abstract class Component
 
     public virtual void Initialize()
     {
-        Debug.WriteLine(this);
         SubComponents.Initialize();
     }
 
