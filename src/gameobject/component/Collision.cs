@@ -8,9 +8,11 @@ public class Collision : Component
     public event CollisionEvent OnCollide;
     public Rectangle Box { get; set; } = Rectangle.Empty;
 
+    public GameObject CollidingGameObject { get; set; }
+
     public Collision(Vector2 position, Vector2 dimensions) : base(false)
     {
-        Box = new Rectangle((int)position.X, (int)position.Y, (int)dimensions.X, (int)dimensions.Y);
+        Box = new Rectangle((int)position.X - (int)(dimensions.X / 2), (int)position.Y - (int)(dimensions.Y / 2), (int)dimensions.X, (int)dimensions.Y);
     }
 
     public static Collision Empty()
@@ -23,7 +25,9 @@ public class Collision : Component
     {
         base.Update();
 
-        Box = new Rectangle((int)GameObject.Position.X, (int)GameObject.Position.Y, Box.Width, Box.Height);
+        CollidingGameObject = null;
+
+        Box = new Rectangle((int)GameObject.Position.X - (Box.Width / 2), (int)GameObject.Position.Y - (Box.Height / 2), Box.Width, Box.Height);
 
         CheckCollision();
     }
@@ -41,6 +45,7 @@ public class Collision : Component
 
             if (Box.Intersects(targetCollision.Box))
             {
+                CollidingGameObject = target;
                 OnCollide?.Invoke(target);
                 break;
             }

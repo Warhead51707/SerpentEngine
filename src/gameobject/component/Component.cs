@@ -33,6 +33,11 @@ public abstract class Component
         return foundComponent as T;
     }
 
+    public void AddSubComponent(Component component)
+    {
+        SubComponents.AddComponent(component);
+    }
+
     public virtual void Update() {
 
     }
