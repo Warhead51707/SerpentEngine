@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace SerpentEngine;
 
@@ -10,9 +11,9 @@ public class Collision : Component
 
     public GameObject CollidingGameObject { get; set; }
 
-    public Collision(Vector2 position, Vector2 dimensions) : base(false)
+    public Collision(Vector2 position, Vector2 dimensions) : base(true)
     {
-        Box = new Rectangle((int)position.X - (int)(dimensions.X / 2), (int)position.Y - (int)(dimensions.Y / 2), (int)dimensions.X, (int)dimensions.Y);
+        Box = new Rectangle((int)position.X, (int)position.Y, (int)dimensions.X, (int)dimensions.Y);
     }
 
     public static Collision Empty()
@@ -27,7 +28,7 @@ public class Collision : Component
 
         CollidingGameObject = null;
 
-        Box = new Rectangle((int)GameObject.Position.X - (Box.Width / 2), (int)GameObject.Position.Y - (Box.Height / 2), Box.Width, Box.Height);
+        Box = new Rectangle((int)GameObject.Position.X, (int)GameObject.Position.Y, Box.Width, Box.Height);
 
         CheckCollision();
     }
@@ -50,6 +51,23 @@ public class Collision : Component
                 break;
             }
         }
+    }
+
+    public override void Draw()
+    {
+
+        if (!DebugStates.ShowCollisionBoxes) return;
+
+        Rectangle bounds = new Rectangle((int)Box.X - (int)(Box.Width / 2), (int)Box.Y - (int)(Box.Height / 2), (int)Box.Width, (int)Box.Height);
+
+        Color color = Color.Blue;
+
+        color.A = 50;
+        Texture2D texture2d = SerpentEngine.Draw.Pixel;
+
+        SerpentEngine.Draw.SpriteBatch.Draw(texture2d, bounds, null, color, 0, Vector2.Zero, SpriteEffects.None, 100 * 0.001f);
+
+        base.Draw();
     }
 
 }

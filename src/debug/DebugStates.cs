@@ -9,5 +9,6 @@ public class DebugStates
 {
     public static bool GuiEnabled = true;
     public static bool ShowButtonHitboxes = false;
+    public static bool ShowCollisionBoxes = false;
 }
 
