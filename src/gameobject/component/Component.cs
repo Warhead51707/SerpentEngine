@@ -38,8 +38,9 @@ public abstract class Component
         SubComponents.AddComponent(component);
     }
 
-    public virtual void Update() {
-
+    public virtual void Update()
+    {
+        SubComponents.Update();
     }
 
     public virtual void Draw()

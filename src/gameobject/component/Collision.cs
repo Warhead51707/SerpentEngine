@@ -7,7 +7,10 @@ public delegate void CollisionEvent(GameObject target);
 public class Collision : Component
 {
     public event CollisionEvent OnCollide;
+
     public Rectangle Box { get; set; } = Rectangle.Empty;
+
+    public Vector2 Offset = Vector2.Zero;
 
     public GameObject CollidingGameObject { get; set; }
 
@@ -28,12 +31,12 @@ public class Collision : Component
 
         CollidingGameObject = null;
 
-        Box = new Rectangle((int)GameObject.Position.X, (int)GameObject.Position.Y, Box.Width, Box.Height);
+        Box = new Rectangle((int)GameObject.Position.X + (int)Offset.X, (int)GameObject.Position.Y + (int)Offset.Y, Box.Width, Box.Height);
 
         CheckCollision();
     }
 
-    private void CheckCollision()
+    protected virtual void CheckCollision()
     {
         
         foreach (GameObject target in SceneManager.CurrentScene.GetGameObjects())
