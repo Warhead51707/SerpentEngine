@@ -22,7 +22,7 @@ public class TileGrid : Component
         TileSets.Add(tileSet);
     }
 
-    public void PlaceTile(Vector2 coordinates, string tileName)
+    public Tile PlaceTile(Vector2 coordinates, string tileName)
     {
         TileSet matchedTileSet = null;
 
@@ -60,6 +60,7 @@ public class TileGrid : Component
             Tiles.Add(coordinates, placedTile);
         }
 
+        return placedTile;
     }
 
 
