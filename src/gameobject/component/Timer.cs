@@ -18,46 +18,48 @@ public class Timer : Component
 
     public bool Autostart { get; set; } = false;
 
-
-    private System.Timers.Timer timer = new System.Timers.Timer();
     public Timer(float waitTime) : base(false)
     {
         WaitTime = waitTime;
-        timer.Enabled = false;
-
     }
 
-    public void Start(int waitTime)
+    public virtual void Start(float waitTime)
     {
         WaitTime = waitTime;
-        Start();
+        Enabled = true;
     }
 
-    public void Start()
+
+    public override void Update()
     {
+        if (!Enabled) return;
 
-        Time = WaitTime;
+        Time += SerpentGame.DeltaTime;
 
-        timer = new System.Timers.Timer(WaitTime * 1000);
 
-        timer.Elapsed += End;
+        if(Time >= WaitTime)
+        {
+            End();
+        }
 
-        timer.Enabled = true;
-
+        base.Update();
     }
 
-    public void End(object sender, ElapsedEventArgs e)
+    public virtual void End()
     {
-        OnTimeout.Invoke();
+        InvokeTimeout();
+        Enabled = false;
+        Time = 0;
 
         if (Autostart)
         {
-            timer.Enabled = false;
-            Start();
+            Start(WaitTime);
         }
-        else
-        {
-            timer.Enabled = false;
-        }
+        
+    }
+
+    public void InvokeTimeout()
+    {
+        OnTimeout.Invoke();
     }
 }
