@@ -28,7 +28,6 @@ namespace SerpentEngine
             Window.Title = windowTitle;
 
             Graphics = new GraphicsDeviceManager(this);
-            IsFixedTimeStep = false;
 
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
@@ -37,6 +36,8 @@ namespace SerpentEngine
         protected override void Initialize()
         {
             base.Initialize();
+
+            IsFixedTimeStep = GraphicsConfig.VSYNC;
         }
 
         protected override void LoadContent()
