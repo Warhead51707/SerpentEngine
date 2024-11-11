@@ -1,61 +1,46 @@
-﻿
+﻿namespace SerpentEngine;
 
-using System.Diagnostics;
-using System.Threading;
-using System.Timers;
+public delegate void TimerFinishEvent();
 
-namespace SerpentEngine;
-
-public delegate void TimeoutEvent();
-
-public class Timer : Component
+public class Timer
 {
-    public event TimeoutEvent OnTimeout;
+    public event TimerFinishEvent OnTimeout;
 
     public float WaitTime { get; set; } = 0;
+    public bool Enabled { get; set; } = false;
+    public bool Loop { get; set; } = false;
+    private float time { get; set; } = 0;
 
-    public float Time { get; set; } = 0;
-
-    public bool Autostart { get; set; } = false;
-
-    public Timer(float waitTime) : base(false)
+    public Timer(float waitTime)
     {
         WaitTime = waitTime;
     }
 
-    public virtual void Start(float waitTime)
-    {
-        WaitTime = waitTime;
-        Enabled = true;
-    }
-
-
-    public override void Update()
+    public void Update()
     {
         if (!Enabled) return;
 
-        Time += SerpentGame.DeltaTime;
+        time += SerpentGame.DeltaTime;
 
-
-        if(Time >= WaitTime)
+        if (time >= WaitTime)
         {
-            End();
+            Finish();
         }
-
-        base.Update();
     }
 
-    public virtual void End()
+    public void Finish()
     {
-        InvokeTimeout();
         Enabled = false;
-        Time = 0;
 
-        if (Autostart)
+        time = 0;
+
+        if (Loop)
         {
-            Start(WaitTime);
+            Enabled = true;
         }
-        
+
+        InvokeTimeout();
+
     }
 
     public void InvokeTimeout()
