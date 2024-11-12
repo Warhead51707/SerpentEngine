@@ -36,8 +36,6 @@ namespace SerpentEngine
         protected override void Initialize()
         {
             base.Initialize();
-
-            IsFixedTimeStep = GraphicsConfig.VSYNC;
         }
 
         protected override void LoadContent()
