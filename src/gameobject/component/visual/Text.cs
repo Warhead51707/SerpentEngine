@@ -14,6 +14,7 @@ namespace SerpentEngine
 {
     public class Text : Component
     {
+        public Vector2 Position { get; set; } = Vector2.Zero;
         public string Body { get; private set; }
         public SpriteFont Font { get; private set; }
         public float Rotation { get; set; } = 0f;
@@ -27,7 +28,6 @@ namespace SerpentEngine
         {
             Body = text;
             Font = SerpentGame.Instance.Content.Load<SpriteFont>(path);
-
         }
 
 
@@ -46,7 +46,7 @@ namespace SerpentEngine
         {
             if (!Enabled) return;
 
-            SerpentEngine.Draw.SpriteBatch.DrawString(Font, Body, GameObject.Position, Color, Rotation, Vector2.Zero, Scale, SpriteEffects.None, (GameObject.Layer + LayerOffset) * 0.001f);
+            SerpentEngine.Draw.SpriteBatch.DrawString(Font, Body, GameObject.Position + Position, Color, Rotation, Vector2.Zero, Scale, SpriteEffects.None, (GameObject.Layer + LayerOffset) * 0.001f);
         }
     }
 }
