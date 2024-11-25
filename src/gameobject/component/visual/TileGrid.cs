@@ -2,6 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace SerpentEngine;
 public class TileGrid : Component
@@ -45,7 +47,6 @@ public class TileGrid : Component
         }
 
         Tile placedTile = matchedTileSet.GetNewInstance(tileName);
-        placedTile.Initialize();
 
         placedTile.Layer = Layer;
 
@@ -71,8 +72,6 @@ public class TileGrid : Component
             for (int x = (int)startCoordinates.X; x <= endCoordinates.X; x++)
             {
                 PlaceTile(new Vector2(x, y), tileName);
-
-
             }
         }
 
@@ -82,8 +81,6 @@ public class TileGrid : Component
     public void RemoveTile(Vector2 coordinates)
     {
         Tile tile = Tiles[coordinates];
-
-        tile.OnRemove();
 
         Tiles.Remove(coordinates);
     }
@@ -151,91 +148,58 @@ public class TileGrid : Component
         return new Vector2(gridCoordinates.X * TileSize.X, gridCoordinates.Y * TileSize.Y);
     }
 
-    public override void Update()
-    {
-        VisibleTiles = 0;
-
-        Camera camera = SceneManager.CurrentScene.Camera;
-
-        Vector2 cameraPosition = camera.GetScreenPostion();
-        Vector2 cameraGridPosition = ConvertWorldCoordinatesToGridCoordinates(cameraPosition);
-
-        float cameraWidth = camera.Viewport.Width / camera.Zoom;
-        float cameraHeight = camera.Viewport.Height / camera.Zoom;
-
-        int horizontalTileCount = (int)(cameraWidth / TileSize.X) + 8;
-        int verticalTileCount = (int)(cameraHeight / TileSize.Y) + 8;
-
-        int horizontalStart = (int)Math.Ceiling(-cameraGridPosition.X / camera.Zoom) - 2;
-        int verticalStart = (int)Math.Ceiling(-cameraGridPosition.Y / camera.Zoom) - 2;
-
-        for (int y = -4; y < verticalTileCount; y++)
-        {
-            for (int x = -4; x < horizontalTileCount; x++)
-            {
-                Vector2 gridCoordinates = new Vector2(horizontalStart + x, verticalStart + y);
-
-                if (Tiles.ContainsKey(gridCoordinates))
-                {
-                    Tiles[gridCoordinates].Update();
-                    VisibleTiles++; 
-                }
-            }
-        }
-    }
-
     public Tile South(Tile tile)
     {
-        if (!Tiles.ContainsKey(ConvertWorldCoordinatesToGridCoordinates(tile.Position) + new Vector2(0, 1))) return Tile.Empty();
+        if (!Tiles.ContainsKey(ConvertWorldCoordinatesToGridCoordinates(tile.Position) + new Vector2(0, 1))) return null;
 
         return Tiles[ConvertWorldCoordinatesToGridCoordinates(tile.Position) + new Vector2(0, 1)];
     }
 
     public Tile North(Tile tile)
     {
-        if (!Tiles.ContainsKey(ConvertWorldCoordinatesToGridCoordinates(tile.Position) + new Vector2(0, -1))) return Tile.Empty();
+        if (!Tiles.ContainsKey(ConvertWorldCoordinatesToGridCoordinates(tile.Position) + new Vector2(0, -1))) return null;
 
         return Tiles[ConvertWorldCoordinatesToGridCoordinates(tile.Position) + new Vector2(0, -1)];
     }
 
     public Tile East(Tile tile)
     {
-        if (!Tiles.ContainsKey(ConvertWorldCoordinatesToGridCoordinates(tile.Position) + new Vector2(1, 0))) return Tile.Empty();
+        if (!Tiles.ContainsKey(ConvertWorldCoordinatesToGridCoordinates(tile.Position) + new Vector2(1, 0))) return null;
 
         return Tiles[ConvertWorldCoordinatesToGridCoordinates(tile.Position) + new Vector2(1, 0)];
     }
 
     public Tile West(Tile tile)
     {
-        if (!Tiles.ContainsKey(ConvertWorldCoordinatesToGridCoordinates(tile.Position) + new Vector2(-1, 0))) return Tile.Empty();
+        if (!Tiles.ContainsKey(ConvertWorldCoordinatesToGridCoordinates(tile.Position) + new Vector2(-1, 0))) return null;
 
         return Tiles[ConvertWorldCoordinatesToGridCoordinates(tile.Position) + new Vector2(-1, 0)];
     }
 
     public Tile South(Tile tile, int tiles)
     {
-        if (!Tiles.ContainsKey(ConvertWorldCoordinatesToGridCoordinates(tile.Position) + new Vector2(0, tiles))) return Tile.Empty();
+        if (!Tiles.ContainsKey(ConvertWorldCoordinatesToGridCoordinates(tile.Position) + new Vector2(0, tiles))) return null;
 
         return Tiles[ConvertWorldCoordinatesToGridCoordinates(tile.Position) + new Vector2(0, tiles)];
     }
 
     public Tile North(Tile tile, int tiles)
     {
-        if (!Tiles.ContainsKey(ConvertWorldCoordinatesToGridCoordinates(tile.Position) + new Vector2(0, -tiles))) return Tile.Empty();
+        if (!Tiles.ContainsKey(ConvertWorldCoordinatesToGridCoordinates(tile.Position) + new Vector2(0, -tiles))) return null;
 
         return Tiles[ConvertWorldCoordinatesToGridCoordinates(tile.Position) + new Vector2(0, -tiles)];
     }
 
     public Tile East(Tile tile, int tiles)
     {
-        if (!Tiles.ContainsKey(ConvertWorldCoordinatesToGridCoordinates(tile.Position) + new Vector2(tiles, 0))) return Tile.Empty();
+        if (!Tiles.ContainsKey(ConvertWorldCoordinatesToGridCoordinates(tile.Position) + new Vector2(tiles, 0))) return null;
 
         return Tiles[ConvertWorldCoordinatesToGridCoordinates(tile.Position) + new Vector2(tiles, 0)];
     }
 
     public Tile West(Tile tile, int tiles)
     {
-        if (!Tiles.ContainsKey(ConvertWorldCoordinatesToGridCoordinates(tile.Position) + new Vector2(-tiles, 0))) return Tile.Empty();
+        if (!Tiles.ContainsKey(ConvertWorldCoordinatesToGridCoordinates(tile.Position) + new Vector2(-tiles, 0))) return null;
 
         return Tiles[ConvertWorldCoordinatesToGridCoordinates(tile.Position) + new Vector2(-tiles, 0)];
     }

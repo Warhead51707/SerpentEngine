@@ -10,52 +10,23 @@ public class TileSet
 
     public Dictionary<string, Func<Tile>> TileRegistry { get; private set; } = new Dictionary<string, Func<Tile>>();
 
-    public void Add(string tileName, Func<Tile> tile)
+    public void AddBySpritePath(string tileName, string spritePath)
     {
-        TileRegistry.Add(tileName, tile);
-    }
-
-    public void AddFromSprite(string tileName, string spritePath)
-    {
-        Tile tile = new Tile(tileName);
+        Tile tile = new Tile(spritePath, tileName);
 
         Tiles.Add(tile);
 
-        Add(tileName, () =>
+        TileRegistry.Add(tileName, () =>
         {
-            Tile newTile = new Tile(tileName);
-
-            Sprite sprite = new Sprite(spritePath);
-            newTile.AddComponent(sprite);
+            Tile newTile = new Tile(spritePath, tileName);
 
             return newTile;
         });
     }
 
-    public void AddFromSpriteSheet(string sheetName, SpriteSheet spriteSheet)
+    public void Add(string tileName, Func<Tile> tile)
     {
-        for (int y = 0; y <= spriteSheet.Size.Y; y++)
-        {
-            for (int x = 0; x <= spriteSheet.Size.X; x++)
-            {
-                spriteSheet.CurrentSprite.Coordinates = new Vector2(x, y);
-
-                Sprite sprite = spriteSheet.CurrentSprite.Clone();
-
-                Tile tile = new Tile(sheetName + "_" + x + "_" + y);
-
-                Tiles.Add(tile);
-
-                Add(sheetName + "_" + x + "_" + y, () =>
-                {
-                    Tile newTile = new Tile(sheetName + "_" + x + "_" + y);
-
-                    newTile.AddComponent(sprite.Clone());
-
-                    return newTile;
-                });
-            }
-        }
+        TileRegistry.Add(tileName, tile);
     }
 
     public Tile GetNewInstance(string tileName)

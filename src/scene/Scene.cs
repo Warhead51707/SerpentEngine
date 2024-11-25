@@ -100,21 +100,7 @@ public abstract class Scene
             foreach (GameObject gameObject in gameObjectsSnapshot)
             {
                 foundGameObjects.Add(gameObject);
-
-                if (!gameObject.HasComponent<TileGrid>()) continue;
-
-                List<TileGrid> tileGrids = gameObject.GetComponents<TileGrid>();
-
-                foreach (TileGrid tileGrid in tileGrids)
-                {
-                    foreach (Tile tile in tileGrid.GetTiles())
-                    {
-                        foundGameObjects.Add(tile);
-                    }
-                }
             }
-        
-
 
         return foundGameObjects;
     }
@@ -128,21 +114,6 @@ public abstract class Scene
             if (gameObject is T)
             {
                 foundGameObjects.Add(gameObject);
-            }
-
-            if (!gameObject.HasComponent<TileGrid>()) continue;
-
-            List<TileGrid> tileGrids = gameObject.GetComponents<TileGrid>();
-
-            foreach (TileGrid tileGrid in tileGrids)
-            {
-                foreach (Tile tile in tileGrid.GetTiles())
-                {
-                    if (tile is T)
-                    {
-                        foundGameObjects.Add(tile);
-                    }
-                }
             }
         }
 
