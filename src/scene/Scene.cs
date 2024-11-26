@@ -75,6 +75,8 @@ public abstract class Scene
 
     public virtual void Update()
     {
+        Camera.Update();
+
         lock (GameObjects)
         {
             gameObjectsSnapshot = GameObjects.ToArray();
@@ -89,18 +91,16 @@ public abstract class Scene
         {
             gameObject.Update();
         }
-
-        Camera.Update();
     }
 
     public List<GameObject> GetGameObjects()
     {
         List<GameObject> foundGameObjects = new List<GameObject>();
 
-            foreach (GameObject gameObject in gameObjectsSnapshot)
-            {
-                foundGameObjects.Add(gameObject);
-            }
+        foreach (GameObject gameObject in GameObjects.ToArray())
+        {
+            foundGameObjects.Add(gameObject);
+        }
 
         return foundGameObjects;
     }
@@ -164,7 +164,7 @@ public abstract class Scene
 
         foreach (GameObject gameObject in GetGameObjects())
         {
-            if(gameObject.Position == position)
+            if (gameObject.Position == position)
             {
                 gameObjects.Add(gameObject);
             }
@@ -230,7 +230,7 @@ public abstract class Scene
         UIElements.Add(group.Parent);
         group.Parent.Initialize();
 
-        foreach(KeyValuePair<GameObject, Vector2> uiEntry in group.Children)
+        foreach (KeyValuePair<GameObject, Vector2> uiEntry in group.Children)
         {
             GameObject ui = uiEntry.Key;
             Vector2 offset = uiEntry.Value;

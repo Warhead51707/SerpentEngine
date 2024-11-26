@@ -2,7 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using SerpentEngine;
 
-namespace CastleGame;
+namespace Tira;
 public class DebugBox : Component
 {
     public Color Color = Color.Black;
