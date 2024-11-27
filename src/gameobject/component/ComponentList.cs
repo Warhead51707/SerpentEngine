@@ -64,15 +64,7 @@ public class ComponentList
 
     public T GetComponent<T>() where T : Component
     {
-        foreach (Component component in Components.ToList())
-        {
-            if (component is T)
-            {
-                return (T)component;
-            }
-        }
-
-        return null;
+        return Components.FirstOrDefault(component => component is T) as T;
     }
 
     public List<T> GetComponents<T>() where T : Component

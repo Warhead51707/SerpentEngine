@@ -112,13 +112,9 @@ public class TileGrid : Component
 
     public Tile GetTileFromGridCoordinates(Vector2 coordinates)
     {
-        foreach (KeyValuePair<Vector2, Tile> tileEntry in Tiles)
+        if (Tiles.ContainsKey(coordinates))
         {
-            if(ConvertWorldCoordinatesToGridCoordinates(tileEntry.Value.Position) == coordinates)
-            {
-                Tile tile = tileEntry.Value;
-                return tile;
-            }
+            return Tiles[coordinates];
         }
 
         return null;
@@ -126,16 +122,9 @@ public class TileGrid : Component
 
     public Tile GetTileFromWorldCoordinates(Vector2 coordinates)
     {
-        foreach (KeyValuePair<Vector2, Tile> tileEntry in Tiles)
-        {
-            if (ConvertWorldCoordinatesToGridCoordinates(tileEntry.Value.Position) == ConvertWorldCoordinatesToGridCoordinates(coordinates))
-            {
-                Tile tile = tileEntry.Value;
-                return tile;
-            }
-        }
+        Vector2 gridCoordinates = ConvertWorldCoordinatesToGridCoordinates(coordinates);
 
-        return null;
+        return GetTileFromGridCoordinates(gridCoordinates);
     }
 
     public Vector2 ConvertWorldCoordinatesToGridCoordinates(Vector2 worldCoordinates)

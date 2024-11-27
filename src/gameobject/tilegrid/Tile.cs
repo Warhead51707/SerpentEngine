@@ -33,7 +33,7 @@ public class Tile
         fileStream.Close();
     }
 
-    public void Draw()
+    public virtual void Draw()
     {
         SerpentEngine.Draw.SpriteBatch.Draw(texture2d, Position + Offset, new Rectangle((int)Coordinates.X, (int)Coordinates.Y, texture2d.Width, texture2d.Height), Color, Rotation, new Vector2(texture2d.Width / 2, texture2d.Height / 2), Scale, Effect, Layer * 0.001f);
     }
