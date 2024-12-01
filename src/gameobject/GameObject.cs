@@ -36,7 +36,7 @@ public class GameObject
         Components.Update();
     }
 
-    public void Draw()
+    public virtual void Draw()
     {
         if (!Enabled) return;
 
