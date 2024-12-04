@@ -18,9 +18,9 @@ namespace SerpentEngine
         public string Body { get; private set; }
         public SpriteFont Font { get; private set; }
         public float Rotation { get; set; } = 0f;
-
         public Color Color = Color.Black;
         public float Scale { get; set; } = 1f;
+        public Vector2 Size => Font.MeasureString(Body) * Scale;
 
         public float LayerOffset { get; set; } = 0;
 

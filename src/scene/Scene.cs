@@ -252,8 +252,13 @@ public abstract class Scene
         }
     }
 
-    public void Pause()
+    public virtual void Pause()
     {
         Paused = true;
+    }
+
+    public virtual void Resume()
+    {
+        Paused = false;
     }
 }
