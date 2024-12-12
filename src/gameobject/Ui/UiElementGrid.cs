@@ -41,8 +41,8 @@ public class UiElementGrid : Component
     public void AddUiElement(GameObject ui)
     {
         ui.Position = Position + ConvertNumberToGridCoordinates(UiElements.Count) * GridSize;
-        UiElements.Add(ui);
         ui.Initialize();
+        UiElements.Add(ui);
     }
 
     public void AddUiElementGroup(UiElementGroup uiGroup)

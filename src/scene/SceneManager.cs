@@ -4,7 +4,7 @@ namespace SerpentEngine;
 public class SceneManager
 {
     // All Scenes in the game
-    public Dictionary<string, Scene> Scenes { get; private set; } = new Dictionary<string, Scene>();
+    public static Dictionary<string, Scene> Scenes { get; private set; } = new Dictionary<string, Scene>();
 
     public static Scene CurrentScene { get; private set; }
 
@@ -12,17 +12,17 @@ public class SceneManager
     {
     }
 
-    public void AddScene(Scene scene)
+    private static void AddScene(Scene scene)
     {
         Scenes.Add(scene.Name, scene);
     }
 
-    public void Remove(Scene scene)
+    public static void RemoveScene(Scene scene)
     {
         Scenes.Remove(scene.Name);
     }
 
-    public void SetCurrentScene(Scene scene)
+    public static void SetCurrentScene(Scene scene)
     {
         if (CurrentScene != null)
         {
@@ -31,7 +31,14 @@ public class SceneManager
 
         CurrentScene = scene;
 
-        CurrentScene.LoadContent();
+        if (!Scenes.ContainsKey(scene.Name))
+        {
+            CurrentScene.LoadContent();
+            AddScene(CurrentScene);
+        } else
+        {
+            CurrentScene = Scenes.GetValueOrDefault(scene.Name);
+        }
 
         CurrentScene.Begin();
     }
